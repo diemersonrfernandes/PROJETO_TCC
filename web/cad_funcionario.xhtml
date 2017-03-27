@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./nova_tela_adm.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml">
+
+    <ui:define name="content">
+       <h:form id="form_cadastro">
+
+            <h2>Cadastrar Funcionário</h2>
+
+            <p:messages autoUpdate="true" closable="true" id="msgGlobal"/>
+
+            <p> Campos com * são obrigatórios</p>
+
+            <h:panelGrid id="formFun" columns="2">
+
+                <p:outputLabel value="Nome:"/>
+                <p:inputText id="nome" required="true" value="#{funBean.funcionario.nome}" />
+
+                <p:outputLabel value="Matrícula:"/>
+                <p:inputMask mask="99999999" id="matricula" required="true" value="#{funBean.funcionario.matricula}"/>
+
+                <p:outputLabel value="Data Admissional:"/>
+                <p:inputMask mask="99/99/9999" id="dt_admissional" required="true"
+                             value="#{funBean.funcionario.data_admissional}" />
+
+                <p:outputLabel value="Login:"/>
+                <p:inputMask mask="99999999" required="true" requiredMessage="Mesmo número da matrícula" 
+                             id="login" value="#{funBean.funcionario.login}"/>
+
+                <p:outputLabel value="Senha:" />
+                <p:password id="senha" required="true" value="#{funBean.funcionario.senha}"/>
+
+                <p:commandButton value="Cadastrar" actionListener="#{funBean.cadastrar()}"
+                                 update=":form_cadastro:formFun"/>
+
+                <p:commandButton value="Limpar" type="reset"/>
+            </h:panelGrid>
+            </h:form>
+        <br></br><br></br>
+
+        <p:dataTable   value="#{funBean.lista}"                      
+                         var="funcionario"
+                         style="width: 600px;">
+            
+                <f:facet name="header">
+                    <h:outputText value="Lista de Funcionários"/>
+                </f:facet>
+
+                <p:column headerText="Nome" >
+                    <h:outputText value="#{funcionario.nome}"/>
+                </p:column>
+
+                <p:column headerText="Matrícula" >
+                    <h:outputText value="#{funcionario.matricula}" />
+                </p:column>
+
+                <p:column headerText="Data Admissional" >
+                    <h:outputText value="#{funcionario.data_admissional}"/>
+                </p:column>
+
+                <p:column headerText="Login" >
+                    <h:outputText value="#{funcionario.login}"/>
+                </p:column>
+
+            </p:dataTable>
+
+    </ui:define>
+
+</ui:composition>

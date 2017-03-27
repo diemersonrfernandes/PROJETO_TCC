@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="default.css" library="css"/>
+        <h:outputStylesheet name="cssLayout.css" library="css"/>
+        <title>Delícias Burguer</title>
+    </h:head>
+
+    <h:body>
+
+        <div id="top">
+            <ui:insert name="top"><center>Delícias Burguer</center></ui:insert>
+        </div>
+        <div>
+            <div id="left">
+                <ui:insert name="left">MENU DE ACESSO</ui:insert>
+                <h:form >
+                    <h:panelGrid columns="1">
+                        <ul>
+                            <h:commandLink value="Início" action="tela.xhtml"/><br></br>
+                            <h:commandLink value="Cardápio" action="cardapio.xhtml"/><br></br>
+                            <h:commandLink value="Acesse sua conta" action="login.xhtml"/><br></br>
+                            <h:commandLink value="Primeiro cadastro" action="cadastro.xhtml"/><br></br>
+                            <h:commandLink value="PEDIDO Lista" action="pedido_Lista_sem_img.xhtml"/><br></br>
+                            <h:commandLink value="CADAS_FUNCIO" action="cad_funcionario.xhtml"/><br></br>
+                            <h:commandLink value="MEUS DAODS" action="meus_dados.xhtml"/><br></br>
+                            <h:commandLink value="PEDIDO" action="pedido.xhtml"/><br></br>
+                            <h:commandLink value="CADASTRO PRODUTO" action="cad_produto.xhtml"/><br></br>
+                        </ul>
+                    </h:panelGrid>                   
+                </h:form>
+
+            </div>
+            <div id="content" class="left_content">
+                <ui:insert name="content"> 
+
+                    <div class="slider">
+                        <ul>
+                            <li><img src="resources/img/01.png" alt=""/></li>
+                            <li><img src="resources/img/03.png" alt=""/></li>
+                            <li><img src="resources/img/02.png" alt=""/></li>
+                            <li><img src="resources/img/04.png" alt=""/></li>
+                        </ul>              
+                    </div>
+
+                    <div class="movi">
+                        <marquee> 
+                            PEÇA JÁ O SEU!!! 
+                        </marquee>
+                    </div>
+
+
+
+                </ui:insert>
+            </div>
+        </div>
+        <div id="bottom">
+            <ui:insert name="bottom">© Delícias Burguer - 2017 - Cintya Rodrigues - Todos os direitos reservados.</ui:insert>
+        </div>
+
+    </h:body>
+
+</html>

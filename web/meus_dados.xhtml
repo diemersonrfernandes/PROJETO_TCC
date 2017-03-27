@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./nova_tela_pedido_cliente.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:event listener="#{clienteBEAN.carregarCadastro}"
+                     type="preRenderView"/>
+        </f:metadata>  
+    </ui:define>
+    
+    <ui:define name="content">
+       <p:dataTable value="#{clienteBEAN.lista}"
+                     var="pess" 
+                     >
+            <p:column headerText="Nome" >
+                <h:outputText value="#{pess.nome}"  />
+            </p:column>
+
+            <p:column headerText="CPF" >
+                <h:outputText value="#{pess.cpf}" />
+            </p:column>
+
+            <p:column headerText="Endereço" >
+                <h:outputText value="#{pess.endereco}" />
+            </p:column>
+
+            <p:column headerText="Telefone" >
+                <h:outputText value="#{pess.telefone}"/>
+            </p:column>
+
+            <p:column headerText="Email" >
+                <h:outputText value="#{pess.email}"/>
+            </p:column>         
+
+            <p:column headerText="Login" >
+                <h:outputText value="#{pess.login}"/>
+            </p:column>
+
+            <p:column headerText="Senha" >
+                <h:outputText value="#{pess.senha}"/>
+            </p:column>
+           
+          
+
+            <p:column headerText="Opção" >
+                <p:button icon="ui-icon-pencil" value="Editar">
+                          <f:param name="nome" value="#{pess.nome}"/>            
+                </p:button>
+            </p:column>
+
+        </p:dataTable>
+    </ui:define>
+
+</ui:composition>

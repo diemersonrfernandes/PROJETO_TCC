@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./nova_tela_pedido_cliente.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ui:define name="content">
+        <h:form >
+            <h2>PEDIDO</h2>
+        </h:form>
+
+        <p:dataTable var="item"
+                     value="#{produtoBean.listaProduto}"
+                     style="width: 900px;">
+
+                <p:column headerText="Código" >
+                    <h:outputText value="#{item.cod_produto}"  />
+                </p:column>
+                
+                <p:column headerText="Produto" >
+                    <h:outputText value="#{item.nome_produto}"  />
+                </p:column>
+
+                <p:column headerText="Quantidade" >
+                         <p:selectOneMenu >
+                            <f:selectItem itemLabel="0" itemValue="0"/>
+                            <f:selectItem itemLabel="1" itemValue="1"/>
+                            <f:selectItem itemLabel="2" itemValue="2"/>
+                            <f:selectItem itemLabel="3" itemValue="3"/>
+                            <f:selectItem itemLabel="4" itemValue="4"/>
+                            <f:selectItem itemLabel="5" itemValue="5"/>
+                            <f:selectItem itemLabel="6" itemValue="6"/>
+                            <f:selectItem itemLabel="7" itemValue="7"/>
+                            <f:selectItem itemLabel="8" itemValue="8"/>
+                            <f:selectItem itemLabel="9" itemValue="9"/>
+                            <f:selectItem itemLabel="10" itemValue="10"/>
+                        </p:selectOneMenu> 
+                </p:column>
+
+                <p:column headerText="Valor Unitário" >
+                    <h:outputText value="#{item.valor}"/>
+                </p:column>
+                
+                <p:column headerText="Opções" >
+                    <p:commandButton value="Adicionar"/>
+                </p:column>
+            
+            </p:dataTable>
+       
+
+    </ui:define>
+</ui:composition>
