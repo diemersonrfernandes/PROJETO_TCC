@@ -1,8 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' ?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<html xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://java.sun.com/jsf/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -12,27 +13,28 @@
     </h:head>
 
     <h:body>
-
+        
         <div id="top">
             <ui:insert name="top"><center>Delícias Burguer</center></ui:insert>
         </div>
-        <div>
+        
+        <div> 
             <div id="left">
-                <ui:insert name="left">MENU DE ACESSO</ui:insert>
+                <!--<ui:insert name="left">MENU DE ACESSOasd</ui:insert>-->
                 <h:form >
-                    <h:panelGrid columns="1">
-                        <ul>
-                            <h:commandLink value="Início" action="tela.xhtml"/><br></br>
-                            <h:commandLink value="Cardápio" action="cardapio.xhtml"/><br></br>
-                            <h:commandLink value="Acesse sua conta" action="login.xhtml"/><br></br>
-                            <h:commandLink value="Primeiro cadastro" action="cadastro.xhtml"/><br></br>
-                            <h:commandLink value="PEDIDO Lista" action="pedido_Lista_sem_img.xhtml"/><br></br>
-                            <h:commandLink value="CADAS_FUNCIO" action="cad_funcionario.xhtml"/><br></br>
-                            <h:commandLink value="MEUS DAODS" action="meus_dados.xhtml"/><br></br>
-                            <h:commandLink value="PEDIDO" action="pedido.xhtml"/><br></br>
-                            <h:commandLink value="CADASTRO PRODUTO" action="cad_produto.xhtml"/><br></br>
-                        </ul>
-                    </h:panelGrid>                   
+                    <p:menu>
+                        <p:submenu label="MENU DE ACESSO">
+                            <p:menuitem value="Início" url="tela.xhtml"/>
+                            <p:menuitem value="Cardápio" url="cardapio.xhtml"/>
+                            <p:menuitem value="Acesse sua conta" url="login.xhtml"/>
+                            <p:menuitem value="Primeiro cadastro" url="cadastro.xhtml"/>
+                            <p:menuitem value="PEDIDO Lista" url="pedido_Lista_sem_img.xhtml"/>
+                            <p:menuitem value="CADAS_FUNCIO" url="cad_funcionario.xhtml"/>
+                            <p:menuitem value="MEUS DAODS" url="meus_dados.xhtml"/>
+                            <p:menuitem value="PEDIDO" url="pedido.xhtml"/>
+                            <p:menuitem value="CADASTRO PRODUTO" url="cad_produto.xhtml"/>
+                        </p:submenu>
+                    </p:menu>
                 </h:form>
 
             </div>
@@ -54,11 +56,10 @@
                         </marquee>
                     </div>
 
-
-
                 </ui:insert>
             </div>
         </div>
+        
         <div id="bottom">
             <ui:insert name="bottom">© Delícias Burguer - 2017 - Cintya Rodrigues - Todos os direitos reservados.</ui:insert>
         </div>
