@@ -5,10 +5,12 @@
  */
 package br.com.projeto.controleacesso.manager;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,12 +35,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         UserDetails user1 = new UserDetailsImpl("admin", "123", authorities1);
         userRepository.put("admin", user1);
 
-        /* SUPRIMENTO */
-        Set<GrantedAuthority> authorities4 = new HashSet<GrantedAuthority>();
-        authorities4.add(authoritySuprimento);
-        UserDetails user4 = new UserDetailsImpl("suprimento", "123", authorities4);
-        userRepository.put("suprimento", user4);
-        
         /* user2/password2 --> GUEST */
         Set<GrantedAuthority> authorities2 = new HashSet<GrantedAuthority>();
         authorities2.add(authorityGuest);
@@ -63,4 +59,24 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return matchingUser;
     }
 
+    public boolean loadRoleByUsername(HttpServletRequest request/*, String roleName*/) throws UsernameNotFoundException {
+
+        String roleName = "ADMIN";
+        
+        Principal principal = request.getUserPrincipal();
+        
+        String role = "FORBIDEN";
+        
+        //Esta logado
+        if (principal != null && !principal.getName().equals("")){
+            UserDetails userDetails = userRepository.get(principal.getName());
+            
+            for (GrantedAuthority grupo : userDetails.getAuthorities()) {
+                grupo.getAuthority();
+                //collection.addAll(role.getPrivileges());
+            }
+        }
+       
+        return true;
+    }
 }

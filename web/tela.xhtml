@@ -1,10 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' ?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:p="http://primefaces.org/ui"
         xmlns:f="http://java.sun.com/jsf/core">
-
+<!--<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>-->
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet name="default.css" library="css"/>
@@ -13,9 +14,14 @@
     </h:head>
 
     <h:body>
-        
-        <div id="top">
-            <ui:insert name="top"><center>Delícias Burguer</center></ui:insert>
+<!--        <h:outputText value="#{securityController.currentUserNameSimple(request)}"/>
+        <h:outputText value="#{myUserDetailService.loadRoleByUsername(request)}"/>
+        -->
+        <div id="topNovo">
+            <ui:insert name="top">
+                <!--<center>Delícias Burguer</center>-->
+                <ui:include src="/controleacesso/sessionTimeOut.xhtml" />
+            </ui:insert>
         </div>
         
         <div> 
@@ -24,7 +30,7 @@
                 <h:form >
                     <p:menu>
                         <p:submenu label="MENU DE ACESSO">
-                            <p:menuitem value="Início" url="tela.xhtml"/>
+                            <p:menuitem value="Início" url="tela.xhtml" rendered="false"/>
                             <p:menuitem value="Cardápio" url="cardapio.xhtml"/>
                             <p:menuitem value="Acesse sua conta" url="login.xhtml"/>
                             <p:menuitem value="Primeiro cadastro" url="cadastro.xhtml"/>

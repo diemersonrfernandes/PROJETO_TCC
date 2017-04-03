@@ -1,8 +1,12 @@
 package br.com.projeto.controleacesso.manager;
 
+import br.com.projeto.dao.UsuarioDAO;
+import br.com.projeto.facade.UsuarioFacade;
+import br.com.projeto.modelo.Usuario;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import javax.ejb.EJB;
 
 import javax.persistence.NoResultException;
 
@@ -33,8 +37,12 @@ public class CustomAuthenticationManager implements AuthenticationManager {
     private static final Log log = LogFactory
                     .getLog(CustomAuthenticationManager.class);
 
-    //private UsuarioDao usuarioDao = new UsuarioDao();
-
+    private UsuarioDAO usuarioDao = new UsuarioDAO();
+    //private Fornecedor current;
+    
+    @EJB
+    private UsuarioFacade ejbFacade;
+    
     private ShaPasswordEncoder passwordEncoder = new ShaPasswordEncoder();
 
     @Override
@@ -42,17 +50,19 @@ public class CustomAuthenticationManager implements AuthenticationManager {
 
         log.debug("Na classe CustomAuthenticationManager. Iniciando o m�todo authenticate()");
 
-        //ControleAcessoUsuario usuario = null;
+        Usuario usuario = null;
 
         try {
+            
+            ejbFacade = new UsuarioFacade();
+            //UsuarioJpaController usuarioJpa = UsuarioJpaController().;
+            usuario = ejbFacade.findUsuarioByName(auth.getName());
+            //usuario = usuarioJpa.findUsuarioByName(auth.getName());
 
-//			ControleAcessoUsuarioDao usuariohome = new ControleAcessoUsuarioDao();
-//			usuario = usuariohome.findUsuarioByName(auth.getName());
-//
-//			if (usuario == null) {
-//				log.error("Usu�rio " + auth.getName() + " n�o encontrado!");
-//				throw new BadCredentialsException("Usu�rio " + auth.getName() + " n�o encontrado!");
-//			}
+            if (usuario == null) {
+                    log.error("Usuário " + auth.getName() + " não encontrado!");
+                    throw new BadCredentialsException("Usuário " + auth.getName() + " não encontrado!");
+            }
         } catch (NoResultException e) {
                 log.error(e.getMessage());
                 throw new BadCredentialsException(e.getMessage());
@@ -83,7 +93,7 @@ public class CustomAuthenticationManager implements AuthenticationManager {
         //HttpSession session = auth. request.getSession(true);
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         attr.getRequest().getSession(true); 
-        attr.getRequest().getSession().setAttribute("usuario", null);//usuario);
+        attr.getRequest().getSession().setAttribute("usuario", usuario);
         return new UsernamePasswordAuthenticationToken(auth.getName(),
                         auth.getCredentials(), getAuthoritiesByUser());//usuario));
 //		}
