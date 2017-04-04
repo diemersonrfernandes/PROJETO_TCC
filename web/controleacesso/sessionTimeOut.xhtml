@@ -13,17 +13,21 @@
          timeout="#{100}"
          onidle="startIdleMonitor()" rendered="#{(request.remoteUser != null)}"/>
        #{msg['logoff.soon.1']}
-       <p:toolbar style="height:75px"> 
+       <p:toolbar style="height:70px"> 
            
 <!--            <p:toolbarGroup align="left" > 
 
                     <p:graphicImage value="/resources/images/topo.jpg" rendered="true" />
             </p:toolbarGroup> -->
             <p:toolbarGroup align="left"> 
-                <center><span id="cabecalhotexto" style="position:absolute; left: 35%; top: 35px; font-weight: bold ; font-size:44px; font-family: fantasy;">Delícia Burger</span></center>
+                <center>
+                    <span id="cabecalhotexto" style="position:absolute; left: 35%; top: 35px; font-weight: bold ; font-size:44px; font-family: fantasy;">
+                        Delícia Burger
+                    </span>
+                </center>
                     <!--<p:graphicImage value="/resources/images/topo.jpg" rendered="true" />-->
             </p:toolbarGroup> 
-            <p:toolbarGroup align="right" style="position:absolute; right:15px;">  
+            <p:toolbarGroup align="right" style="position:absolute; right:15px; top: 55px">  
 
                     <span id="usuario" style="font-weight: bold ; font-size:12px;"> #{request.remoteUser == null ? 'Visitante' : request.remoteUser}</span>
                     <p:separator />
@@ -32,7 +36,7 @@
                     <p:separator />  
                     <p:commandButton type="button" 
                             value="#{request.remoteUser == null ? 'Login' : 'Sair'}" 
-                            style="width: auto; height: 30px; font-size: 13px;" 
+                            style="width: auto; height: 20px; font-size: 13px;" 
                             icon="ui-icon-extlink" 
                             onclick="logout()"/>  
             </p:toolbarGroup>

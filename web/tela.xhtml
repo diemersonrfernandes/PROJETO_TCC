@@ -1,75 +1,77 @@
-<?xml version='1.0' encoding='UTF-8' ?> 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://java.sun.com/jsf/core">
 
-<html xmlns:ui="http://java.sun.com/jsf/facelets"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:p="http://primefaces.org/ui"
-        xmlns:f="http://java.sun.com/jsf/core">
-<!--<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>-->
-    <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <f:view contentType="text/html" id="fview">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <h:outputStylesheet name="default.css" library="css"/>
         <h:outputStylesheet name="cssLayout.css" library="css"/>
         <title>Delícias Burguer</title>
-    </h:head>
+        <ui:debug />
+        <f:metadata>
+            <ui:insert name="metadata" />
+        </f:metadata>
 
-    <h:body>
-<!--        <h:outputText value="#{securityController.currentUserNameSimple(request)}"/>
-        <h:outputText value="#{myUserDetailService.loadRoleByUsername(request)}"/>
-        -->
-        <div id="topNovo">
-            <ui:insert name="top">
-                <!--<center>Delícias Burguer</center>-->
-                <ui:include src="/controleacesso/sessionTimeOut.xhtml" />
-            </ui:insert>
-        </div>
-        
-        <div> 
-            <div id="left">
-                <!--<ui:insert name="left">MENU DE ACESSOasd</ui:insert>-->
-                <h:form >
-                    <p:menu>
-                        <p:submenu label="MENU DE ACESSO">
-                            <p:menuitem value="Início" url="tela.xhtml" rendered="false"/>
-                            <p:menuitem value="Cardápio" url="cardapio.xhtml"/>
-                            <p:menuitem value="Acesse sua conta" url="login.xhtml"/>
-                            <p:menuitem value="Primeiro cadastro" url="cadastro.xhtml"/>
-                            <p:menuitem value="PEDIDO Lista" url="pedido_Lista_sem_img.xhtml"/>
-                            <p:menuitem value="CADAS_FUNCIO" url="cad_funcionario.xhtml"/>
-                            <p:menuitem value="MEUS DAODS" url="meus_dados.xhtml"/>
-                            <p:menuitem value="PEDIDO" url="pedido.xhtml"/>
-                            <p:menuitem value="CADASTRO PRODUTO" url="cad_produto.xhtml"/>
-                        </p:submenu>
-                    </p:menu>
-                </h:form>
+        <h:head>
+            <p:growl id="mensagens" autoUpdate="true"  sticky="true"/>
 
-            </div>
-            <div id="content" class="left_content">
-                <ui:insert name="content"> 
+            <p:layout fullPage="true" resizeTitle="resize" style="background-color:#FFFFFF;">
+                <p:layoutUnit position="north" size="115" id="top" resizable="false" >
+                    <ui:include src="/controleacesso/sessionTimeOut.xhtml" />
+                </p:layoutUnit>
+                
+                <p:layoutUnit size="200" 
+	        		position="west" 
+	        		id="left"  
+	        		resizable="true" 
+	        		collapsible="true" 
+	        		closable="false" style="font-size:small;padding:0px;">
+                
+                    <h:form >
+                        <p:menu>
+                            <p:submenu label="MENU DE ACESSO">
+                                <p:menuitem value="Início" url="tela.xhtml"/>
+                                <p:menuitem value="Cardápio" url="cardapio.xhtml"/>
+                                <p:menuitem value="Acesse sua conta" url="login.xhtml"/>
+                                <p:menuitem value="Primeiro cadastro" url="cadastro.xhtml"/>
+                                <p:menuitem value="Pedido Lista" url="pedido_Lista_sem_img.xhtml"/>
+                                <p:menuitem value="Cadastro Funcionário" url="cad_funcionario.xhtml" rendered="#{usuario.getIdperfil().getNmperfil() == 'Administrador'}"/>
+                                <p:menuitem value="Meus Dados" url="meus_dados.xhtml"/>
+                                <p:menuitem value="Pedido" url="pedido.xhtml" rendered="#{usuario.getIdperfil().getNmperfil() == 'Administrador'}"/>
+                                <p:menuitem value="Cadastro Produto" url="cad_produto.xhtml" rendered="#{usuario.getIdperfil().getNmperfil() == 'Administrador'}"/>
+                            </p:submenu>
+                        </p:menu>
+                    </h:form>
+                </p:layoutUnit>
+                
+                <p:layoutUnit styleClass="layoutUnitCenter" position="center" id="layoutUnitCentr">
+                    <ui:insert name="content" />
+                        <div class="slider">
+                            <ul>
+                                <li><img src="resources/img/01.png" alt=""/></li>
+                                <li><img src="resources/img/03.png" alt=""/></li>
+                                <li><img src="resources/img/02.png" alt=""/></li>
+                                <li><img src="resources/img/04.png" alt=""/></li>
+                            </ul>              
+                        </div>
+                        <div class="movi">
+                            <marquee> 
+                                PEÇA JÁ O SEU!!! 
+                            </marquee>
+                        </div>
+                </p:layoutUnit>
+                
+                <p:layoutUnit position="south" id="bottom">
+                    <center>
+                        <ui:insert name="bottom">© Delícias Burguer - 2017 - Cintya Rodrigues - Todos os direitos reservados.</ui:insert>
+                    </center>
+                </p:layoutUnit>
 
-                    <div class="slider">
-                        <ul>
-                            <li><img src="resources/img/01.png" alt=""/></li>
-                            <li><img src="resources/img/03.png" alt=""/></li>
-                            <li><img src="resources/img/02.png" alt=""/></li>
-                            <li><img src="resources/img/04.png" alt=""/></li>
-                        </ul>              
-                    </div>
-
-                    <div class="movi">
-                        <marquee> 
-                            PEÇA JÁ O SEU!!! 
-                        </marquee>
-                    </div>
-
-                </ui:insert>
-            </div>
-        </div>
-        
-        <div id="bottom">
-            <ui:insert name="bottom">© Delícias Burguer - 2017 - Cintya Rodrigues - Todos os direitos reservados.</ui:insert>
-        </div>
-
-    </h:body>
-
+            </p:layout>
+        </h:head>
+    </f:view>
 </html>

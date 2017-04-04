@@ -18,6 +18,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+/***
+ * 
+ * @author Antonio Augusto
+ * Essa classe é utilizada apenas pra testes sem utilização de banco de dados.
+ * Para usar que essa classe seja chamada ao invés basta descomentar security:authentication-manager no xml de configuração
+ */
 @Service("myUserDetailService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 

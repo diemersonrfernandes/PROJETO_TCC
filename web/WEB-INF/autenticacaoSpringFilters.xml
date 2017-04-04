@@ -11,29 +11,36 @@
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<http auto-config="false" use-expressions="true" entry-point-ref="authenticationEntryPoint">
-            <custom-filter ref="authenticationFilter" position="FORM_LOGIN_FILTER"/>
-            <logout logout-success-url="/controleacesso/login.xhtml" />
-		
-            <!--<intercept-url pattern="/index.xhtml" access="hasRole('index.xhtml')" />-->
-            <intercept-url pattern="/cad_funcionario.xhtml" access="hasAnyRole('ADMIN','SUPRIMENTO')" /> 
-	</http>
-  
+    <http auto-config="false" use-expressions="true" entry-point-ref="authenticationEntryPoint">
+        <custom-filter ref="authenticationFilter" position="FORM_LOGIN_FILTER"/>
+        <logout logout-success-url="/controleacesso/login.xhtml" />
 
-	<!-- 	<b:bean class="cobra.controleacesso.web.filter.CustomFilter" id="customFilter"/> -->
-	<b:bean class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter" id="authenticationFilter" p:authenticationManager-ref="customAuthenticationManager"/>
+        <!--<intercept-url pattern="/index.xhtml" access="hasRole('index.xhtml')" />-->
+        <intercept-url pattern="/cad_funcionario.xhtml" access="hasAnyRole('Administrador','Diretoria')" /> 
+    </http>
 
-	<!-- Custom authentication manager. In order to authenticate, username and password must not be the same -->
- 	<b:bean class="br.com.projeto.controleacesso.manager.CustomAuthenticationManager" id="customAuthenticationManager"/>
-	
-	<!-- The AuthenticationEntryPoint is responsible for redirecting the user to a particular page, like a login page,
- 			whenever the server sends back a response requiring authentication -->
- 	<!-- See Spring-Security Reference 5.4.1 for more info -->
- 	<b:bean id="authenticationEntryPoint"  class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint" p:loginFormUrl="/controleacesso/login.xhtml"/>
-	<!-- The tag below has no use but Spring Security needs it to autowire the parent property of 
-			org.springframework.security.authentication.ProviderManager. Otherwise we get an error 
-			A probable bug. This is still under investigation-->
-	
-	<authentication-manager/>
+
+    <!-- 	<b:bean class="cobra.controleacesso.web.filter.CustomFilter" id="customFilter"/> -->
+    <b:bean class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter" id="authenticationFilter" p:authenticationManager-ref="customAuthenticationManager"/>
+
+    <!-- Custom authentication manager. In order to authenticate, username and password must not be the same -->
+    <b:bean class="br.com.projeto.controleacesso.manager.CustomAuthenticationManager" id="customAuthenticationManager"/>
+
+    <!-- The AuthenticationEntryPoint is responsible for redirecting the user to a particular page, like a login page,
+                    whenever the server sends back a response requiring authentication -->
+    <!-- See Spring-Security Reference 5.4.1 for more info -->
+    <b:bean id="authenticationEntryPoint"  class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint" p:loginFormUrl="/controleacesso/login.xhtml"/>
+    <!-- The tag below has no use but Spring Security needs it to autowire the parent property of 
+                    org.springframework.security.authentication.ProviderManager. Otherwise we get an error 
+                    A probable bug. This is still under investigation-->
+
+    <!-- Defining our custom authentication provider que chama a classe do serviço em questão.
+        Basicamento pra uso de autenticação sem banco de dados-->
+<!--    <security:authentication-manager>
+        <security:authentication-provider
+            user-service-ref="myUserDetailService">
+        </security:authentication-provider>
+    </security:authentication-manager>-->
+    <authentication-manager/>
 		
 </beans:beans>

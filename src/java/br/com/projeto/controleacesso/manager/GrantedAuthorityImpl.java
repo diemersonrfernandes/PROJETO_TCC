@@ -9,7 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 /**
  *
- * @author prohgy
+ * @author Antonio Augusto
  */
 public class GrantedAuthorityImpl implements GrantedAuthority {
 
