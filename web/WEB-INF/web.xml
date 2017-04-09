@@ -21,7 +21,7 @@
         <session-timeout>30</session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>tela.xhtml</welcome-file>
+        <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
     
     	<!-- Controle de acesso - Início das configurações para o Spring Security 3 -->

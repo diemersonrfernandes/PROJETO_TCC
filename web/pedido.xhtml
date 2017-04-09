@@ -1,13 +1,19 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="./nova_tela_pedido_cliente.xhtml"
+                template="pedidoTemplate.xhtml"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:h="http://xmlns.jcp.org/jsf/html">
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
 
+    <ui:define name="metadata" />
     <ui:define name="content">
-        <table align="center" id="pedido_online" cellspacing="80px" >
+        
+        <h:body style="font-size:small;padding:0px;">
+            <h:form id="formManter"  prependId="false" enctype="multipart/form-data">
+                <table align="center" id="pedido_online" cellspacing="80px" >
 
             <h2>PEDIDO</h2>
 
@@ -216,33 +222,100 @@
             </tbody>
         </table>
         <br></br><br></br>
+<!--                <p:dataTable   value="#{funBean.lista}"                      
+                     var="pedidoTable"
+                     style="width: 90%;">
+                    <f:facet name="header">
+                        <h:outputText value="Lista de produtos"/>
+                    </f:facet>
 
-        <p:dataTable var="item"
-                     >
-
-                <f:facet name="header">
-                    <h:outputText value="Meu Pedido"/>
-                </f:facet>
+                    <p:column headerText="Produto" >
+                        <img src="WEB-INF/../resources/img/01.png" height="130" width="130"/>
+                        Duplo carne
+                        <img src="WEB-INF/../resources/img/02.png" height="130" width="130"/>
+                        Mix cargo
+                        <img src="WEB-INF/../resources/img/03.png" height="130" width="130"/>
+                        Mini Frango
+                        <img src="WEB-INF/../resources/img/12.png" height="130" width="130"/>
+                        Mega Batata
+                        <img src="WEB-INF/../resources/img/07.png" height="130" width="130"/>
+                        Refrigerante
+                        <img src="WEB-INF/../resources/img/08.png" height="130" width="130"/>
+                        Água
+                        <img src="WEB-INF/../resources/img/10.png" height="130" width="130"/>
+                        Suco
+                        <img src="WEB-INF/../resources/img/02.png" height="130" width="130"/>
+                        Sundae
+                        <img src="WEB-INF/../resources/img/16.png" height="130" width="130"/>
+                       Sorvete
+                    </p:column>
+                    <p:column headerText="Preço" >
+                        R$15,98
+                        R$13,95
+                        R$12,50
+                        R$9,90
+                        R$3,50
+                        R$5,99
+                        R$4,50
+                        R$5,40
+                        R$2,40
+                    </p:column>
+                    
+                    <p:column headerText="Quantidade" >
+                        <c:forEach begin="1" end="9">
+                            <p:selectOneMenu >
+                                <f:selectItem itemLabel="0" itemValue="0"/>
+                                <f:selectItem itemLabel="1" itemValue="1"/>
+                                <f:selectItem itemLabel="2" itemValue="2"/>
+                                <f:selectItem itemLabel="3" itemValue="3"/>
+                                <f:selectItem itemLabel="4" itemValue="4"/>
+                                <f:selectItem itemLabel="5" itemValue="5"/>
+                                <f:selectItem itemLabel="6" itemValue="6"/>
+                                <f:selectItem itemLabel="7" itemValue="7"/>
+                                <f:selectItem itemLabel="8" itemValue="8"/>
+                                <f:selectItem itemLabel="9" itemValue="9"/>
+                                <f:selectItem itemLabel="10" itemValue="10"/>
+                            </p:selectOneMenu>
+                        </c:forEach>
+                    </p:column>
+                    <p:column headerText="Ação" >
+                        <h:commandButton value="ADICIONAR" id="bt1" />
+                        <h:commandButton value="ADICIONAR" id="bt2" />
+                        <h:commandButton value="ADICIONAR" id="bt3" />
+                        <h:commandButton value="ADICIONAR" id="bt4" />
+                        <h:commandButton value="ADICIONAR" id="bt5" />
+                        <h:commandButton value="ADICIONAR" id="bt6" />
+                        <h:commandButton value="ADICIONAR" id="bt7" />
+                        <h:commandButton value="ADICIONAR" id="bt8" />
+                        <h:commandButton value="ADICIONAR" id="bt9" />
+                    </p:column>
+                </p:dataTable>-->
                 
-                <p:column headerText="Produto" >
-                    <h:outputText  />
-                </p:column>
+                <p:dataTable var="item">
 
-                <p:column headerText="Quantidade" >
-                    <h:outputText  />
-                </p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Meu Pedido"/>
+                    </f:facet>
 
-                <p:column headerText="Valor Unitário" >
-                    <h:outputText />
-                </p:column>
+                    <p:column headerText="Produto" >
+                        <h:outputText  />
+                    </p:column>
 
-                
-                <p:column headerText="Opções" >
-                    <p:commandButton value="Remover"/>
-                </p:column>
-            
-            </p:dataTable>
+                    <p:column headerText="Quantidade" >
+                        <h:outputText  />
+                    </p:column>
 
+                    <p:column headerText="Valor Unitário" >
+                        <h:outputText />
+                    </p:column>
+
+
+                    <p:column headerText="Opções" >
+                        <p:commandButton value="Remover"/>
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+        </h:body>
     </ui:define>
-
 </ui:composition>

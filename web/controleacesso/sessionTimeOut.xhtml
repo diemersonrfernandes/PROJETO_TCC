@@ -6,14 +6,14 @@
    xmlns:p="http://primefaces.org/ui"
    xmlns:f="http://java.sun.com/jsf/core">
 
-<ui:composition>
+<ui:composition >
 	<script type='text/javascript' src="#{request.contextPath}/controleacesso/date.js"></script>  
-	<h:form prependId="false">
+	<h:form prependId="false" >
       <p:idleMonitor
          timeout="#{100}"
          onidle="startIdleMonitor()" rendered="#{(request.remoteUser != null)}"/>
        #{msg['logoff.soon.1']}
-       <p:toolbar style="height:70px"> 
+       <p:toolbar style="height:70px" > 
            
 <!--            <p:toolbarGroup align="left" > 
 
@@ -22,6 +22,7 @@
             <p:toolbarGroup align="left"> 
                 <center>
                     <span id="cabecalhotexto" style="position:absolute; left: 35%; top: 35px; font-weight: bold ; font-size:44px; font-family: fantasy;">
+                        <!--<a href = "index.xhtml">Delícia Burger</a>-->
                         Delícia Burger
                     </span>
                 </center>
@@ -29,7 +30,7 @@
             </p:toolbarGroup> 
             <p:toolbarGroup align="right" style="position:absolute; right:15px; top: 55px">  
 
-                    <span id="usuario" style="font-weight: bold ; font-size:12px;"> #{request.remoteUser == null ? 'Visitante' : request.remoteUser}</span>
+                    <span id="usuario" style="font-weight: bold ; font-size:12px;"> #{request.remoteUser == null ? 'Visitante' : clienteBEAN.getClienteByUsuario(usuario.getIdusuario())}</span>
                     <p:separator />
                     <span id="textosessaoexpira" style="font-weight: bold ; font-size:12px;">#{request.remoteUser == null ? '' : 'Sessão expira em: '} </span>
                     <span id="dialog-countdown" style="font-weight: bold ; font-size:12px;"></span>

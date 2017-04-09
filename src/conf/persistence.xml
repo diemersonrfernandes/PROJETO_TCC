@@ -3,6 +3,7 @@
   <persistence-unit name="PROJETO_TCCPU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>java:app/projeto_tcc</jta-data-source>
+    <class>br.com.projeto.dao.ClienteDAO</class>
     <class>br.com.projeto.dao.PerfilDAO</class>
     <class>br.com.projeto.dao.UsuarioDAO</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>

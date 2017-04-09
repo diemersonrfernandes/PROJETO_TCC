@@ -10,8 +10,42 @@ public class Cliente implements Serializable{
     private String endereco;
     private String telefone;
     private String email;
-    private String login;
-    private String senha;  
+    private Usuario idusuario; 
+    private String nmUsuario;
+    private String deSenha;
+    private int idPerfil;
+
+    public int getIdPerfil() {
+        return idPerfil;
+    }
+
+    public void setIdPerfil(int idPerfil) {
+        this.idPerfil = idPerfil;
+    }
+
+    public String getNmUsuario() {
+        return nmUsuario;
+    }
+
+    public void setNmUsuario(String nmUsuario) {
+        this.nmUsuario = nmUsuario;
+    }
+
+    public String getDeSenha() {
+        return deSenha;
+    }
+
+    public void setDeSenha(String deSenha) {
+        this.deSenha = deSenha;
+    }
+
+    public Usuario getIdusuario() {
+        return idusuario;
+    }
+
+    public void setIdusuario(Usuario idusuario) {
+        this.idusuario = idusuario;
+    }
    
 
     public int getId() {
@@ -45,8 +79,7 @@ public class Cliente implements Serializable{
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
-    
-    
+     
 
     public String getTelefone() {
         return telefone;
@@ -63,21 +96,5 @@ public class Cliente implements Serializable{
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }   
 
 }
