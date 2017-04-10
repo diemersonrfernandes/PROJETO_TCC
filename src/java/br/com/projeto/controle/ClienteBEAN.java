@@ -7,18 +7,21 @@ import br.com.projeto.facade.ClienteFacade;
 import br.com.projeto.facade.UsuarioFacade;
 import br.com.projeto.modelo.Cliente;
 import br.com.projeto.util.facesUtil;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.persistence.NoResultException;
+import javax.servlet.http.HttpServletResponse;
 
 
 //ManagedBean faz a ligação com interface com usuário (tela)
 
 @ManagedBean(name = "clienteBEAN")
-@SessionScoped
+@RequestScoped
 public class ClienteBEAN implements Serializable{
 
     @EJB
@@ -63,10 +66,11 @@ public ClienteBEAN(){
 
 //GET E SET DE LISTA
 
-    public ClienteDAO getClienteByUsuario(int idUsuario) {
+    public ClienteDAO getClienteByUsuario(UsuarioDAO usuarioDAO) throws NoResultException{
         if (clienteFacade == null)
             clienteFacade = new ClienteFacade();
-        return clienteFacade.FindByUsuario(idUsuario);
+        
+        return clienteFacade.FindByUsuario(usuarioDAO);
     }
     
     public List<ClienteDAO> getLista() {
@@ -81,7 +85,7 @@ public ClienteBEAN(){
     }
     
 //BOTÃO CONFIRMAR    
-    public String confirmar(int idPerfil){  
+    public String confirmar(int idPerfil) throws IOException{  
         facesUtil.adiconarMsgInfo("Cadastro realizado com sucesso!");
         
         UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -100,7 +104,11 @@ public ClienteBEAN(){
         //clienteDAO.insert(cliente);
         //cliente = new Cliente();  
         //lista = clienteDAO.getListaCliente();
-        return "pedido.xhtml";
+        return "pedido";
+//        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+//        //HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+//        response.sendRedirect("pedido.html");
+        //return "";      
     }    
 //BOTÃO ALTERAR    
     public void alterar(){

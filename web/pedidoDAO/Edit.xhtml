@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditPedidoDAOTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditPedidoDAOLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{pedidoDAOController.selected.id}" title="#{bundle.EditPedidoDAOTitle_id}" required="true" requiredMessage="#{bundle.EditPedidoDAORequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.EditPedidoDAOLabel_valor}" for="valor" />
+                    <h:inputText id="valor" value="#{pedidoDAOController.selected.valor}" title="#{bundle.EditPedidoDAOTitle_valor}" required="true" requiredMessage="#{bundle.EditPedidoDAORequiredMessage_valor}"/>
+                    <h:outputLabel value="#{bundle.EditPedidoDAOLabel_quantidade}" for="quantidade" />
+                    <h:inputText id="quantidade" value="#{pedidoDAOController.selected.quantidade}" title="#{bundle.EditPedidoDAOTitle_quantidade}" required="true" requiredMessage="#{bundle.EditPedidoDAORequiredMessage_quantidade}"/>
+                    <h:outputLabel value="#{bundle.EditPedidoDAOLabel_dtpedido}" for="dtpedido" />
+                    <h:inputText id="dtpedido" value="#{pedidoDAOController.selected.dtpedido}" title="#{bundle.EditPedidoDAOTitle_dtpedido}" required="true" requiredMessage="#{bundle.EditPedidoDAORequiredMessage_dtpedido}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditPedidoDAOLabel_status}" for="status" />
+                    <h:inputText id="status" value="#{pedidoDAOController.selected.status}" title="#{bundle.EditPedidoDAOTitle_status}" />
+                    <h:outputLabel value="#{bundle.EditPedidoDAOLabel_idcliente}" for="idcliente" />
+                    <h:selectOneMenu id="idcliente" value="#{pedidoDAOController.selected.idcliente}" title="#{bundle.EditPedidoDAOTitle_idcliente}" required="true" requiredMessage="#{bundle.EditPedidoDAORequiredMessage_idcliente}">
+                        <f:selectItems value="#{clienteDAOController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{pedidoDAOController.update}" value="#{bundle.EditPedidoDAOSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditPedidoDAOViewLink}"/>
+                <br />
+                <h:commandLink action="#{pedidoDAOController.prepareList}" value="#{bundle.EditPedidoDAOShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditPedidoDAOIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

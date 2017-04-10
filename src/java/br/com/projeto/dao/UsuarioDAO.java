@@ -39,6 +39,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "UsuarioDAO.findByDeSenha", query = "SELECT u FROM UsuarioDAO u WHERE u.deSenha = :deSenha")})
 public class UsuarioDAO implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
+    private Collection<ClienteDAO> clienteDAOCollection;
+
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
 //    private Collection<ClienteDAO> clienteDAOCollection;
 
@@ -165,5 +168,14 @@ public class UsuarioDAO implements Serializable {
 //    public void setClienteDAOCollection(Collection<ClienteDAO> clienteDAOCollection) {
 //        this.clienteDAOCollection = clienteDAOCollection;
 //    }
+
+    @XmlTransient
+    public Collection<ClienteDAO> getClienteDAOCollection() {
+        return clienteDAOCollection;
+    }
+
+    public void setClienteDAOCollection(Collection<ClienteDAO> clienteDAOCollection) {
+        this.clienteDAOCollection = clienteDAOCollection;
+    }
     
 }

@@ -37,14 +37,14 @@ public class ClienteFacade extends AbstractFacade<ClienteDAO> {
         super(ClienteDAO.class);
     }
     
-     public ClienteDAO FindByUsuario(int idUsuario) {
+     public ClienteDAO FindByUsuario(UsuarioDAO usuarioDAO) throws NoResultException{
         getEntityManager();
         ClienteDAO cliente;
         try {
                 cliente = (ClienteDAO) em.createNamedQuery("ClienteDAO.findByUsuario")
-                                .setParameter("idusuario", idUsuario).getSingleResult();
+                                .setParameter("idusuario", usuarioDAO.getIdusuario()).getSingleResult();
         }catch (NoResultException e){
-                throw new NoResultException("Usuário "+ idUsuario + " não encontrado");
+                throw new NoResultException("Cliente não encontrado");  
         }
         return cliente;
     }

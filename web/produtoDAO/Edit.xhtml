@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditProdutoDAOTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditProdutoDAOLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{produtoDAOController.selected.id}" title="#{bundle.EditProdutoDAOTitle_id}" required="true" requiredMessage="#{bundle.EditProdutoDAORequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.EditProdutoDAOLabel_nome}" for="nome" />
+                    <h:inputText id="nome" value="#{produtoDAOController.selected.nome}" title="#{bundle.EditProdutoDAOTitle_nome}" required="true" requiredMessage="#{bundle.EditProdutoDAORequiredMessage_nome}"/>
+                    <h:outputLabel value="#{bundle.EditProdutoDAOLabel_valor}" for="valor" />
+                    <h:inputText id="valor" value="#{produtoDAOController.selected.valor}" title="#{bundle.EditProdutoDAOTitle_valor}" required="true" requiredMessage="#{bundle.EditProdutoDAORequiredMessage_valor}"/>
+                    <h:outputLabel value="#{bundle.EditProdutoDAOLabel_nomeimagem}" for="nomeimagem" />
+                    <h:inputText id="nomeimagem" value="#{produtoDAOController.selected.nomeimagem}" title="#{bundle.EditProdutoDAOTitle_nomeimagem}" required="true" requiredMessage="#{bundle.EditProdutoDAORequiredMessage_nomeimagem}"/>
+                </h:panelGrid>
+                <h:commandLink action="#{produtoDAOController.update}" value="#{bundle.EditProdutoDAOSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditProdutoDAOViewLink}"/>
+                <br />
+                <h:commandLink action="#{produtoDAOController.prepareList}" value="#{bundle.EditProdutoDAOShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditProdutoDAOIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
