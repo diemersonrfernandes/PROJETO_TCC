@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author prohgy
+ * @author Antonio Augusto
  */
 @Stateless
 public class ClienteFacade extends AbstractFacade<ClienteDAO> {

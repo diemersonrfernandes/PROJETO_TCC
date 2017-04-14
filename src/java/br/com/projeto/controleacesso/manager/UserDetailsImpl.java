@@ -7,7 +7,7 @@ package br.com.projeto.controleacesso.manager;
 
 /**
  *
- * @author prohgy
+ * @author Antonio Augusto
  */
 import java.util.Collection;
 import java.util.HashSet;

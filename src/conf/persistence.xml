@@ -4,12 +4,15 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>java:app/projeto_tcc</jta-data-source>
     <class>br.com.projeto.dao.ClienteDAO</class>
-    <class>br.com.projeto.dao.PerfilDAO</class>
-    <class>br.com.projeto.dao.UsuarioDAO</class>
-    <class>br.com.projeto.dao.ProdutoDAO</class>
-    <class>br.com.projeto.dao.PedidoDAO</class>
     <class>br.com.projeto.dao.ItemPedidoDAO</class>
+    <class>br.com.projeto.dao.PedidoDAO</class>
+    <class>br.com.projeto.dao.PerfilDAO</class>
+    <class>br.com.projeto.dao.ProdutoDAO</class>
+    <class>br.com.projeto.dao.UsuarioDAO</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
-    <properties/>
+    <properties>
+      <property name="eclipselink.logging.level" value="FINE"/>
+      <property name="hibernate.show_sql" value="true"/>
+    </properties>
   </persistence-unit>
 </persistence>

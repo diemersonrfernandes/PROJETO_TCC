@@ -101,14 +101,8 @@ public ClienteBEAN(){
         clienteDAO.setIdusuario(usuarioDAO);
         
         clienteFacade.create(clienteDAO);
-        //clienteDAO.insert(cliente);
-        //cliente = new Cliente();  
-        //lista = clienteDAO.getListaCliente();
-        return "pedido";
-//        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-//        //HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-//        response.sendRedirect("pedido.html");
-        //return "";      
+
+        return "pedido.xhtml?faces-redirect=true";
     }    
 //BOTÃO ALTERAR    
     public void alterar(){

@@ -17,15 +17,15 @@
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.EditItemPedidoDAOLabel_iditem}" for="iditem" />
                     <h:inputText id="iditem" value="#{itemPedidoDAOController.selected.iditem}" title="#{bundle.EditItemPedidoDAOTitle_iditem}" required="true" requiredMessage="#{bundle.EditItemPedidoDAORequiredMessage_iditem}"/>
-                    <h:outputLabel value="#{bundle.EditItemPedidoDAOLabel_idproduto}" for="idproduto" />
-                    <h:selectOneMenu id="idproduto" value="#{itemPedidoDAOController.selected.idproduto}" title="#{bundle.EditItemPedidoDAOTitle_idproduto}" required="true" requiredMessage="#{bundle.EditItemPedidoDAORequiredMessage_idproduto}">
-                        <f:selectItems value="#{produtoDAOController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
                     <h:outputLabel value="#{bundle.EditItemPedidoDAOLabel_quantidade}" for="quantidade" />
                     <h:inputText id="quantidade" value="#{itemPedidoDAOController.selected.quantidade}" title="#{bundle.EditItemPedidoDAOTitle_quantidade}" required="true" requiredMessage="#{bundle.EditItemPedidoDAORequiredMessage_quantidade}"/>
                     <h:outputLabel value="#{bundle.EditItemPedidoDAOLabel_idpedido}" for="idpedido" />
                     <h:selectOneMenu id="idpedido" value="#{itemPedidoDAOController.selected.idpedido}" title="#{bundle.EditItemPedidoDAOTitle_idpedido}" required="true" requiredMessage="#{bundle.EditItemPedidoDAORequiredMessage_idpedido}">
                         <f:selectItems value="#{pedidoDAOController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditItemPedidoDAOLabel_idproduto}" for="idproduto" />
+                    <h:selectOneMenu id="idproduto" value="#{itemPedidoDAOController.selected.idproduto}" title="#{bundle.EditItemPedidoDAOTitle_idproduto}" required="true" requiredMessage="#{bundle.EditItemPedidoDAORequiredMessage_idproduto}">
+                        <f:selectItems value="#{produtoDAOController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
                 <h:commandLink action="#{itemPedidoDAOController.update}" value="#{bundle.EditItemPedidoDAOSaveLink}"/>

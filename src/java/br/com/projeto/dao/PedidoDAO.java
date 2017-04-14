@@ -7,10 +7,8 @@ package br.com.projeto.dao;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,13 +17,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -60,8 +56,6 @@ public class PedidoDAO implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dtpedido;
     private Boolean status;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idpedido")
-    private Collection<ItemPedidoDAO> itemPedidoDAOCollection;
     @JoinColumn(name = "idcliente", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ClienteDAO idcliente;
@@ -118,15 +112,6 @@ public class PedidoDAO implements Serializable {
 
     public void setStatus(Boolean status) {
         this.status = status;
-    }
-
-    @XmlTransient
-    public Collection<ItemPedidoDAO> getItemPedidoDAOCollection() {
-        return itemPedidoDAOCollection;
-    }
-
-    public void setItemPedidoDAOCollection(Collection<ItemPedidoDAO> itemPedidoDAOCollection) {
-        this.itemPedidoDAOCollection = itemPedidoDAOCollection;
     }
 
     public ClienteDAO getIdcliente() {

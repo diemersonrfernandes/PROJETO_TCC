@@ -29,25 +29,28 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "ItemPedidoDAO.findAll", query = "SELECT i FROM ItemPedidoDAO i"),
     @NamedQuery(name = "ItemPedidoDAO.findByIditem", query = "SELECT i FROM ItemPedidoDAO i WHERE i.iditem = :iditem"),
-    @NamedQuery(name = "ItemPedidoDAO.findByIdproduto", query = "SELECT i FROM ItemPedidoDAO i WHERE i.idproduto = :idproduto"),
     @NamedQuery(name = "ItemPedidoDAO.findByQuantidade", query = "SELECT i FROM ItemPedidoDAO i WHERE i.quantidade = :quantidade")})
 public class ItemPedidoDAO implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     private Integer iditem;
-    @JoinColumn(name = "idproduto", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private ProdutoDAO idproduto;
+    
     @Basic(optional = false)
     @NotNull
     private int quantidade;
+    
     @JoinColumn(name = "idpedido", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private PedidoDAO idpedido;
- 
+    
+    @JoinColumn(name = "idproduto", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private ProdutoDAO idproduto;
+
     public ItemPedidoDAO() {
     }
 
@@ -55,9 +58,8 @@ public class ItemPedidoDAO implements Serializable {
         this.iditem = iditem;
     }
 
-    public ItemPedidoDAO(Integer iditem, ProdutoDAO idproduto, int quantidade) {
+    public ItemPedidoDAO(Integer iditem, int quantidade) {
         this.iditem = iditem;
-        this.idproduto = idproduto;
         this.quantidade = quantidade;
     }
 
@@ -67,14 +69,6 @@ public class ItemPedidoDAO implements Serializable {
 
     public void setIditem(Integer iditem) {
         this.iditem = iditem;
-    }
-
-    public ProdutoDAO getIdproduto() {
-        return idproduto;
-    }
-
-    public void setIdproduto(ProdutoDAO idproduto) {
-        this.idproduto = idproduto;
     }
 
     public int getQuantidade() {
@@ -91,6 +85,14 @@ public class ItemPedidoDAO implements Serializable {
 
     public void setIdpedido(PedidoDAO idpedido) {
         this.idpedido = idpedido;
+    }
+
+    public ProdutoDAO getIdproduto() {
+        return idproduto;
+    }
+
+    public void setIdproduto(ProdutoDAO idproduto) {
+        this.idproduto = idproduto;
     }
 
     @Override

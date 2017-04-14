@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Antonio Augusto
+ * @author prohgy
  */
 @Entity
 @Table(name = "cliente", catalog = "projeto_tcc", schema = "")
@@ -42,37 +41,29 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "ClienteDAO.findByUsuario", query = "SELECT c FROM ClienteDAO c WHERE c.idusuario.idusuario = :idusuario")})
 public class ClienteDAO implements Serializable {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcliente")
-    private Collection<PedidoDAO> pedidoDAOCollection;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
     private Integer id;
     @Size(max = 50)
-    @Column(name = "NOME")
     private String nome;
     @Size(max = 50)
-    @Column(name = "CPF")
     private String cpf;
     @Size(max = 50)
-    @Column(name = "ENDERECO")
     private String endereco;
     @Size(max = 50)
-    @Column(name = "TELEFONE")
     private String telefone;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="E-mail inválido")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 50)
-    @Column(name = "EMAIL")
     private String email;
     @JoinColumn(name = "idusuario", referencedColumnName = "idusuario")
     @ManyToOne(optional = false)
     private UsuarioDAO idusuario;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcliente")
+    private Collection<PedidoDAO> pedidoDAOCollection;
 
     public ClienteDAO() {
-        idusuario = new UsuarioDAO();
     }
 
     public ClienteDAO(Integer id) {
@@ -135,6 +126,15 @@ public class ClienteDAO implements Serializable {
         this.idusuario = idusuario;
     }
 
+    @XmlTransient
+    public Collection<PedidoDAO> getPedidoDAOCollection() {
+        return pedidoDAOCollection;
+    }
+
+    public void setPedidoDAOCollection(Collection<PedidoDAO> pedidoDAOCollection) {
+        this.pedidoDAOCollection = pedidoDAOCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -158,15 +158,6 @@ public class ClienteDAO implements Serializable {
     @Override
     public String toString() {
         return "br.com.projeto.dao.ClienteDAO[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public Collection<PedidoDAO> getPedidoDAOCollection() {
-        return pedidoDAOCollection;
-    }
-
-    public void setPedidoDAOCollection(Collection<PedidoDAO> pedidoDAOCollection) {
-        this.pedidoDAOCollection = pedidoDAOCollection;
     }
     
 }

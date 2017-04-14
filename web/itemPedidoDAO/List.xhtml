@@ -28,12 +28,6 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListItemPedidoDAOTitle_idproduto}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idproduto}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListItemPedidoDAOTitle_quantidade}"/>
                             </f:facet>
                             <h:outputText value="#{item.quantidade}"/>
@@ -43,6 +37,12 @@
                                 <h:outputText value="#{bundle.ListItemPedidoDAOTitle_idpedido}"/>
                             </f:facet>
                             <h:outputText value="#{item.idpedido}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListItemPedidoDAOTitle_idproduto}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idproduto}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">

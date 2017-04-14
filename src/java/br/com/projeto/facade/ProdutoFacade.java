@@ -5,17 +5,17 @@
  */
 package br.com.projeto.facade;
 
-import br.com.projeto.dao.PedidoDAO;
+import br.com.projeto.dao.ProdutoDAO;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author prohgy
+ * @author Antonio Augusto
  */
 @Stateless
-public class PedidoDAOFacade extends AbstractFacade<PedidoDAO> {
+public class ProdutoFacade extends AbstractFacade<ProdutoDAO> {
 
     @PersistenceContext(unitName = "PROJETO_TCCPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class PedidoDAOFacade extends AbstractFacade<PedidoDAO> {
         return em;
     }
 
-    public PedidoDAOFacade() {
-        super(PedidoDAO.class);
+    public ProdutoFacade() {
+        super(ProdutoDAO.class);
     }
     
 }

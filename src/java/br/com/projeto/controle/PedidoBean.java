@@ -8,14 +8,15 @@ import br.com.projeto.dao.ItemPedidoDAO;
 import br.com.projeto.dao.ProdutoDAO;
 import br.com.projeto.dao.UsuarioDAO;
 import br.com.projeto.facade.ClienteFacade;
-import br.com.projeto.facade.ItemPedidoDAOFacade;
-import br.com.projeto.facade.PedidoDAOFacade;
+import br.com.projeto.facade.ItemPedidoFacade;
+import br.com.projeto.facade.PedidoFacade;
 import br.com.projeto.modelo.Carrinho;
 import br.com.projeto.modelo.Funcionario;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -36,10 +37,13 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @RequestScoped
 public class PedidoBean implements Serializable {
 
+    @EJB
+    private ItemPedidoFacade itemPedidoFacade;
+
     private PedidoDAO current;
     private DataModel items = null;
     @EJB
-    private br.com.projeto.facade.PedidoDAOFacade ejbFacade;
+    private br.com.projeto.facade.PedidoFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -54,7 +58,7 @@ public class PedidoBean implements Serializable {
         return current;
     }
 
-    private PedidoDAOFacade getFacade() {
+    private PedidoFacade getFacade() {
         return ejbFacade;
     }
 
@@ -160,14 +164,31 @@ public class PedidoBean implements Serializable {
             UsuarioDAO usuariodao = (UsuarioDAO)attr.getRequest().getSession().getAttribute("usuario");
             ClienteDAO clienteDAO = new ClienteFacade().FindByUsuario(usuariodao);
             
+            // Teste
+//            ProdutoDAO produtoDao = new ProdutoDAO();
+//            produtoDao.setId(1);
+//            produtoDao.setNome("Teste");
+//            produtoDao.setNomeimagem("01.png");
+//            produtoDao.setValor(new BigDecimal(11.11));
+//            ItemPedidoFacade itemPedidoFacade = new  ItemPedidoFacade();
+//            ItemPedidoDAO itemPedidoDAOTeste = new ItemPedidoDAO();
+//            itemPedidoDAOTeste.setIdpedido(current);
+//            itemPedidoDAOTeste.setIdproduto(produtoDao);
+//            itemPedidoDAOTeste.setQuantidade(1);
+//            itemPedidoFacade.create(itemPedidoDAOTeste);
+            
+            
             //Salva o pedido
+            if (current == null) {
+                current = new PedidoDAO();
+            }
             current.setQuantidade(listaCarrinho.size());
             current.setValor(new BigDecimal(soma));
             current.setIdcliente(clienteDAO);
+            current.setDtpedido(new Date());
             getFacade().create(current);
             
-            ItemPedidoDAOFacade itemPedidoFacade = new  ItemPedidoDAOFacade();
-            // Salva os itens de pedido
+            
             for (Carrinho carrinho : listaCarrinho) {
                 ItemPedidoDAO itemPedidoDAO = new ItemPedidoDAO();
                 itemPedidoDAO.setIdpedido(current);
@@ -176,6 +197,8 @@ public class PedidoBean implements Serializable {
                            
                 itemPedidoFacade.create(itemPedidoDAO);
             }
+            
+            //itemPedidoFacade.flush();
             JsfUtil.addSuccessMessage("Pedido criado com sucesso");
             
             removeCarrinho();
@@ -299,7 +322,7 @@ public class PedidoBean implements Serializable {
                 return null;
             }
             PedidoBean controller = (PedidoBean) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "pedidoDAOController");
+                    getValue(facesContext.getELContext(), null, "pedidoBean");
             return controller.getPedidoDAO(getKey(value));
         }
 
