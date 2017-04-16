@@ -60,7 +60,7 @@ CREATE TABLE `cliente` (
   PRIMARY KEY (`id`),
   KEY `idusuario_idx` (`idusuario`),
   CONSTRAINT `idusuario` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,'Mais um teste','444.444.444-44','Quadra 3 conjunto l','(55)5.5555-5555','contato',14),(2,'Antonio Augusto Teixeira','777.777.777-77','Quadra 4 conjunto l','(55)5.5555-5555','contato@gmail',3),(3,'João Moreira Nuner','888.888.888-88','Setor norte','(88)8.8884-4444','nunes@hotmail.com',16),(4,'Marciano sales','777.777.777-77','88888 todoss','(55)5.5555-5555','kkkkk',17),(5,'Marciano sales','777.777.777-77','88888 todoss','(55)5.5555-5555','kkkkk',18),(6,'Loide Teste','777.777.777-77','Grande quadra 3 rua 4','(88)8.8888-8888','contolod@gmail.com',19),(7,'Loide Teste','777.777.777-77','Grande quadra 3 rua 4','(88)8.8888-8888','contolod@gmail.com',20),(8,'Loide Teste','777.777.777-77','Grande quadra 3 rua 4','(88)8.8888-8888','contolod@gmail.com',21),(9,'Teste','777.777.777-77','Casa 655','(22)2.2222-2222','conta',22),(10,'asdasdasd','333.333.333-33','asdasd','(44)4.4444-4444','asdasd',23),(11,'asdasdasd','333.333.333-33','asdasd','(44)4.4444-4444','asdasd',24),(12,'asdasd','333.333.333-33','4dsdsds','(55)5.5555-5555','dfdfdf',25),(13,'ssssssssssssss','222.222.222-22','ddddddddddd','(11)1.1111-1111','fffffffffffffff',26),(14,'ddddddd','444.444.444-44','fffff','(55)5.5555-5555','gggggg',27);
+INSERT INTO `cliente` VALUES (1,'Mais um teste','444.444.444-44','Quadra 3 conjunto l','(55)5.5555-5555','contato',14),(2,'Antonio Augusto Teixeira','777.777.777-77','Quadra 4 conjunto l','(55)5.5555-5555','contato@gmail',3),(3,'João Moreira Nuner','888.888.888-88','Setor norte','(88)8.8884-4444','nunes@hotmail.com',16);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,9 +117,10 @@ CREATE TABLE `item_pedido` (
   `quantidade` int(11) NOT NULL,
   PRIMARY KEY (`iditem`),
   KEY `item_pedido_idx` (`idpedido`),
+  KEY `item_cliente_idx` (`idproduto`),
   CONSTRAINT `item_pedido` FOREIGN KEY (`idpedido`) REFERENCES `pedido` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `item_produto` FOREIGN KEY (`idpedido`) REFERENCES `produto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  CONSTRAINT `item_produto` FOREIGN KEY (`idproduto`) REFERENCES `produto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -128,6 +129,7 @@ CREATE TABLE `item_pedido` (
 
 LOCK TABLES `item_pedido` WRITE;
 /*!40000 ALTER TABLE `item_pedido` DISABLE KEYS */;
+INSERT INTO `item_pedido` VALUES (1,1,1,3),(2,28,2,2),(3,29,2,2),(4,29,2,2);
 /*!40000 ALTER TABLE `item_pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,7 +150,7 @@ CREATE TABLE `pedido` (
   PRIMARY KEY (`id`),
   KEY `pedido_cliente_idx` (`idcliente`),
   CONSTRAINT `pedido_cliente` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,6 +159,7 @@ CREATE TABLE `pedido` (
 
 LOCK TABLES `pedido` WRITE;
 /*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
+INSERT INTO `pedido` VALUES (1,2,26.45,2,'2017-04-11 21:47:09',NULL),(22,2,12.50,1,'2017-04-13 14:18:08',NULL),(23,2,12.50,1,'2017-04-13 14:19:02',NULL),(24,2,13.95,1,'2017-04-13 14:43:39',NULL),(25,2,13.95,1,'2017-04-13 14:47:42',NULL),(26,2,13.95,1,'2017-04-13 15:10:44',NULL),(27,2,15.98,1,'2017-04-13 15:56:17',NULL),(28,2,13.95,1,'2017-04-13 23:30:53',NULL),(29,2,57.83,4,'2017-04-13 23:46:44',NULL),(30,2,41.85,3,'2017-04-16 17:08:19',NULL),(31,2,88.34,6,'2017-04-16 17:19:50',NULL),(32,2,15.98,1,'2017-04-16 17:22:31',NULL),(33,2,27.90,2,'2017-04-16 17:23:15',NULL),(34,2,25.00,2,'2017-04-16 17:24:50',NULL);
 /*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -248,7 +251,7 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`idusuario`),
   KEY `idperfil_idx` (`idperfil`),
   CONSTRAINT `idperfil` FOREIGN KEY (`idperfil`) REFERENCES `perfil` (`idperfil`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -257,7 +260,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'admin',1,'123'),(2,'Funcionario',2,'123'),(3,'Cliente',3,'123'),(11,'teste',3,'1234567889'),(12,'teste',3,'1234567889'),(13,'teste',3,'1234567889'),(14,'gerado',3,'123456789123'),(15,'antonio',3,'123'),(16,'nunes',3,'123'),(17,'marciano',3,'123'),(18,'marciano',3,'123'),(19,'loide',3,'123'),(20,'loide',3,'123'),(21,'loide',3,'123'),(22,'teste',3,'123'),(23,'sssss',3,'123'),(24,'sssss',3,'123'),(25,'sd',3,'sd'),(26,'teste',3,'123'),(27,'sd',3,'sd');
+INSERT INTO `usuario` VALUES (1,'admin',1,'123'),(2,'Funcionario',2,'123'),(3,'Cliente',3,'123'),(11,'teste',3,'1234567889'),(12,'teste',3,'1234567889'),(13,'teste',3,'1234567889'),(14,'gerado',3,'123456789123'),(15,'antonio',3,'123'),(16,'nunes',3,'123'),(17,'marciano',3,'123'),(18,'marciano',3,'123'),(19,'loide',3,'123'),(20,'loide',3,'123'),(21,'loide',3,'123'),(22,'teste',3,'123'),(23,'sssss',3,'123'),(24,'sssss',3,'123'),(25,'sd',3,'sd'),(26,'teste',3,'123'),(27,'sd',3,'sd'),(28,'teste',3,'123'),(29,'teste',3,'123'),(30,'ttt',3,'ttt'),(31,'ttt',3,'ttt'),(32,'Teste',3,'123'),(33,'teste',3,'123');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -270,4 +273,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-09 22:20:31
+-- Dump completed on 2017-04-16 20:52:08
