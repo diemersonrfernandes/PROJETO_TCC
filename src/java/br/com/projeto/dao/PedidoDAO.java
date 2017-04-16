@@ -36,7 +36,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "PedidoDAO.findByValor", query = "SELECT p FROM PedidoDAO p WHERE p.valor = :valor"),
     @NamedQuery(name = "PedidoDAO.findByQuantidade", query = "SELECT p FROM PedidoDAO p WHERE p.quantidade = :quantidade"),
     @NamedQuery(name = "PedidoDAO.findByDtpedido", query = "SELECT p FROM PedidoDAO p WHERE p.dtpedido = :dtpedido"),
-    @NamedQuery(name = "PedidoDAO.findByStatus", query = "SELECT p FROM PedidoDAO p WHERE p.status = :status")})
+    @NamedQuery(name = "PedidoDAO.findByStatus", query = "SELECT p FROM PedidoDAO p WHERE p.status = :status"),
+    @NamedQuery(name = "PedidoDAO.findByCliente", query = "SELECT p FROM PedidoDAO p WHERE p.idcliente = :cliente")})
 public class PedidoDAO implements Serializable {
 
     private static final long serialVersionUID = 1L;

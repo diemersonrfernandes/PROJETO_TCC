@@ -14,7 +14,8 @@
     <http auto-config="false" use-expressions="true" entry-point-ref="authenticationEntryPoint">
         <custom-filter ref="authenticationFilter" position="FORM_LOGIN_FILTER"/>
         <logout logout-success-url="/controleacesso/login.xhtml" />
-        <intercept-url pattern="/pedido.xhtml" access="hasRole('Cliente')" /> 
+        <intercept-url pattern="/pedido.xhtml" access="hasRole('Cliente')" />
+        <intercept-url pattern="/manterCliente.xhtml" access="hasAnyRole('Administrador','Cliente')" />
         <intercept-url pattern="/cad_funcionario.xhtml" access="hasAnyRole('Administrador','Diretoria')" /> 
     </http>
 

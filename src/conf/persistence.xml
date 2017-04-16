@@ -10,9 +10,9 @@
     <class>br.com.projeto.dao.ProdutoDAO</class>
     <class>br.com.projeto.dao.UsuarioDAO</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
-    <properties>
+<!--    <properties>
       <property name="eclipselink.logging.level" value="FINE"/>
       <property name="hibernate.show_sql" value="true"/>
-    </properties>
+    </properties>-->
   </persistence-unit>
 </persistence>

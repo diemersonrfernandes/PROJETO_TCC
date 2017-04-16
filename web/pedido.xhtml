@@ -10,88 +10,85 @@
         <ui:define name="metadata" />
         <ui:define name="content">
 
+           
+            
             <!--<h:body style="font-size:small;padding:0px;">-->
 
                 <h:form id="formManter"  prependId="false" enctype="multipart/form-data" >
-
-                    <h:dataTable 
-                        value="#{produtoDAOController.items}" 
-                        var="item" border="0" cellpadding="2" 
-                        cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" 
-                        rules="all" style="border:solid 1px" width="90%">
-                        <f:facet name="header">
-                            <h:outputText value="PEDIDO"/>
-                        </f:facet>
-                        <h:column >
+                    <p:fieldset id="fieldset_lista_pedido" toggleable="true" legend="Meus Pedidos" collapsed="true">
+                        <p:dataTable value="#{pedidoBean.items}" var="item"  >
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nº Pedido"/>
+                                </f:facet>
+                                <h:outputText value="#{item.id}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Quantidade"/>
+                                </f:facet>
+                                <h:outputText value="#{item.quantidade}"/>
+                            </p:column>   
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Valor Total"/>
+                                </f:facet>
+                                <h:outputText value="#{item.valor}"/>
+                            </p:column> 
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Data"/>
+                                </f:facet>
+                                <h:outputText value="#{item.dtpedido}" >
+                                     <f:convertDateTime pattern="dd-MM-yyyy hh:mm:ss" />
+                                </h:outputText>
+                            </p:column> 
+                        </p:dataTable>
+                    </p:fieldset>
+                    <br/>
+                    
+                    <p:fieldset id="fieldset_pedido" toggleable="true" legend="Faça seu Pedido">
+                        <h:dataTable 
+                            value="#{produtoDAOController.items}" 
+                            id="itemTable" var="item" border="0" cellpadding="2" 
+                            cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" 
+                            rules="all" style="border:solid 1px" width="90%">
                             <f:facet name="header">
-                                <h:outputText value="Produto"/>
+                                <h:outputText value="PEDIDO"/>
                             </f:facet>
-                            <img src="WEB-INF/../resources/img/#{item.nomeimagem}" height="130" width="130"/>
-                            <!--<p:graphicImage name="WEB-INF/../resources/img/#{item.nomeimagem}" url="WEB-INF/../resources/img/#{item.nomeimagem}"/>-->
-                             <h:outputText value="#{item.nome}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Valor"/>
-                            </f:facet>
-                            <h:outputText value="#{item.valor}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Quantidade"/>
-                            </f:facet>
-                            <p:selectOneMenu id="qtde#{item.id}">
-                                <f:selectItem itemLabel="0" itemValue="0"/>
-                                <f:selectItem itemLabel="1" itemValue="1"/>
-                                <f:selectItem itemLabel="2" itemValue="2"/>
-                                <f:selectItem itemLabel="3" itemValue="3"/>
-                                <f:selectItem itemLabel="4" itemValue="4"/>
-                                <f:selectItem itemLabel="5" itemValue="5"/>
-                                <f:selectItem itemLabel="6" itemValue="6"/>
-                                <f:selectItem itemLabel="7" itemValue="7"/>
-                                <f:selectItem itemLabel="8" itemValue="8"/>
-                                <f:selectItem itemLabel="9" itemValue="9"/>
-                                <f:selectItem itemLabel="10" itemValue="10"/>
-                            </p:selectOneMenu>
-                            <h:outputText value=""/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Opção"/>
-                            </f:facet>
-                            <p:commandButton value="Adicionar" 
-                                actionListener="#{pedidoBean.adicionaCarrinho(item, 2)}"
-                                oncomplete="PF('varDialogCarrinho').show();"
-                                update=":dialogCarrinho"/>
-
-                        </h:column>
-                    </h:dataTable>
-
-
-                    <p:dataTable var="item">
-
-                        <f:facet name="header">
-                            <h:outputText value="Meu Pedido"/>
-                        </f:facet>
-
-                        <p:column headerText="Produto" >
-                            <h:outputText  />
-                        </p:column>
-
-                        <p:column headerText="Quantidade" >
-                            <h:outputText  />
-                        </p:column>
-
-                        <p:column headerText="Valor Unitário" >
-                            <h:outputText />
-                        </p:column>
-
-
-                        <p:column headerText="Opções" >
-                            <p:commandButton value="Remover"/>
-                        </p:column>
-
-                    </p:dataTable>
+                            <h:column >
+                                <f:facet name="header">
+                                    <h:outputText value="Produto"/>
+                                </f:facet>
+                                <img src="WEB-INF/../resources/img/#{item.nomeimagem}" height="130" width="130"/>
+                                <!--<p:graphicImage name="WEB-INF/../resources/img/#{item.nomeimagem}" url="WEB-INF/../resources/img/#{item.nomeimagem}"/>-->
+                                 <h:outputText value="#{item.nome}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Valor"/>
+                                </f:facet>
+                                <h:outputText value="#{item.valor}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Opção"/>
+                                </f:facet>
+                                 
+                                <p:commandButton value="Adicionar "
+                                    id="btn#{item.id}"
+                                    actionListener="#{pedidoBean.adicionaCarrinho(item, pedidoBean.quantidade)}"
+                                    oncomplete="PF('varDialogCarrinho').show();"
+                                    update=":dialogCarrinho"
+                                    ajax="true">
+                                </p:commandButton>
+                            </h:column>
+                               
+                            
+                        </h:dataTable>
+                    </p:fieldset>
+                    
+                    
                 </h:form>
 
                 <p:dialog header="Carrinho" id="dialogCarrinho" 
@@ -102,7 +99,7 @@
                         width="250"
                         dynamic="true"
                         position="top" 
-                        visible="true">
+                        visible="#{pedidoBean.getCarrinho() != null}">
                     <h:form id="formDialog">
                         <h:outputText value="Quantidade:" />
                         <h:outputText value="#{pedidoBean.getCarrinho() != null ? pedidoBean.getCarrinho().size() : 0}" />
@@ -114,12 +111,10 @@
                             oncomplete="PF('varDialogCarrinho').show();"
                             update=":dialogCarrinho" 
                             actionListener="#{pedidoBean.removeCarrinho}"/>
-
-                     
                         &nbsp;&nbsp;&nbsp;
                         <p:commandButton value="Finalizar" 
-                            oncomplete="PF('varDialogCarrinho').show();"
-                            update=":dialogCarrinho" 
+                            oncomplete="PF('varDialogCarrinho').hide();"
+                            update=":formManter" 
                             actionListener="#{pedidoBean.create}"/>
 
                         

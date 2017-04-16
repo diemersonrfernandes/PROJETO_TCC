@@ -58,8 +58,9 @@
                     </p:fieldset>
                     <br/><br/><br/>
                     <div class="buttons">
-                        <p:commandButton value="Confirmar" icon="ui-icon-check" action="#{clienteBEAN.confirmar(3)}"
-                                         update=":formManter:formCad"/>
+                        <h:commandLink action="#{clienteBEAN.confirmar}" value="Confirmar"/>
+                
+
                         <p:commandButton value="Limpar" type="reset" immediate="true" /> 
                     </div>
                 </p:fieldset>
