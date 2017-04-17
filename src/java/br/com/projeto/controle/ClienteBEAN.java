@@ -44,12 +44,12 @@ public class ClienteBEAN implements Serializable {
         clienteSelecionado = new Cliente();
     }
     
-    @PostConstruct
-    public void init() {
-        if (clienteDAO == null) {
-            clienteDAO = new ClienteDAO();
-        }
-    }
+//    @PostConstruct
+//    public void init() {
+//        if (clienteDAO == null) {
+//            clienteDAO = new ClienteDAO();
+//        }
+//    }
 //GET E SET CLIENTESELECIONADO
 
     public Cliente getClienteSelecionado() {
