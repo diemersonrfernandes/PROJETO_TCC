@@ -5,6 +5,7 @@
  */
 package br.com.projeto.facade;
 
+import br.com.projeto.dao.ClienteDAO;
 import br.com.projeto.dao.UsuarioDAO;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -15,10 +16,10 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Antonio Augusto
+ * @author prohgy
  */
 @Stateless
-public class UsuarioFacade extends AbstractFacade<UsuarioDAO> {
+public class ClienteFacade extends AbstractFacade<ClienteDAO> {
 
     @PersistenceContext(unitName = "PROJETO_TCCPU")
     private EntityManager em;
@@ -32,21 +33,19 @@ public class UsuarioFacade extends AbstractFacade<UsuarioDAO> {
         return em;
     }
 
-    public UsuarioFacade() {
-        super(UsuarioDAO.class);
+    public ClienteFacade() {
+        super(ClienteDAO.class);
     }
     
-    public UsuarioDAO findUsuarioByName(String nmUsuario) throws NoResultException{
-            //log.debug("Obtendo Usuario com o nome: " + nmLogin);
-
+     public ClienteDAO FindByUsuario(UsuarioDAO usuarioDAO) throws NoResultException{
         getEntityManager();
-        UsuarioDAO usuario;
+        ClienteDAO cliente;
         try {
-                usuario = (UsuarioDAO) em.createNamedQuery("UsuarioDAO.findByNmusuario")
-                                .setParameter("nmusuario", nmUsuario).getSingleResult();
+                cliente = (ClienteDAO) em.createNamedQuery("ClienteDAO.findByUsuario")
+                                .setParameter("idusuario", usuarioDAO.getIdusuario()).getSingleResult();
         }catch (NoResultException e){
-                throw new NoResultException("Usuário "+ nmUsuario + " não encontrado");
+                throw new NoResultException("Cliente não encontrado");  
         }
-        return usuario;
+        return cliente;
     }
 }

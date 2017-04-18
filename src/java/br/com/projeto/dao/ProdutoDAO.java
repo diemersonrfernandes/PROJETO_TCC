@@ -1,58 +1,126 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package br.com.projeto.dao;
 
-import br.com.projeto.conexaoBD.Conexao;
-import br.com.projeto.modelo.Produto;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ *
+ * @author prohgy
+ */
+@Entity
+@Table(name = "produto", catalog = "projeto_tcc", schema = "")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "ProdutoDAO.findAll", query = "SELECT p FROM ProdutoDAO p"),
+    @NamedQuery(name = "ProdutoDAO.findById", query = "SELECT p FROM ProdutoDAO p WHERE p.id = :id"),
+    @NamedQuery(name = "ProdutoDAO.findByNome", query = "SELECT p FROM ProdutoDAO p WHERE p.nome = :nome"),
+    @NamedQuery(name = "ProdutoDAO.findByValor", query = "SELECT p FROM ProdutoDAO p WHERE p.valor = :valor"),
+    @NamedQuery(name = "ProdutoDAO.findByNomeimagem", query = "SELECT p FROM ProdutoDAO p WHERE p.nomeimagem = :nomeimagem")})
+public class ProdutoDAO implements Serializable {
 
-public class ProdutoDAO {
-    private PreparedStatement ps; 
-    private ResultSet rs; 
-    private Connection con; 
-    private String sql;
-    
-    public ProdutoDAO(){    
-    con = Conexao.abreConexao();
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    private Integer id;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
+    private String nome;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Basic(optional = false)
+    @NotNull
+    private BigDecimal valor;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    private String nomeimagem;
+
+    public ProdutoDAO() {
     }
-    
-    public boolean insert(Produto produto){
-        sql = "insert into produto (cod_produto,nome_produto,valor)"
-                + "values(?,?,?)";
-        try{
-             ps = con.prepareStatement(sql);
-            ps.setInt(1, produto.getCod_produto());
-            ps.setString(2, produto.getNome_produto());
-            ps.setDouble(3, produto.getValor());
-            
-        return ps.execute();
-        }catch (SQLException erro){  
-            erro.printStackTrace();
+
+    public ProdutoDAO(Integer id) {
+        this.id = id;
+    }
+
+    public ProdutoDAO(Integer id, String nome, BigDecimal valor, String nomeimagem) {
+        this.id = id;
+        this.nome = nome;
+        this.valor = valor;
+        this.nomeimagem = nomeimagem;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
+    }
+
+    public String getNomeimagem() {
+        return nomeimagem;
+    }
+
+    public void setNomeimagem(String nomeimagem) {
+        this.nomeimagem = nomeimagem;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof ProdutoDAO)) {
             return false;
-        }        
+        }
+        ProdutoDAO other = (ProdutoDAO) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
     }
-    public List<Produto> getListaProduto(){
-        sql = "select * from produto ";
-        List<Produto> lista = new ArrayList<>();
-        Produto produto;
-        try {
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()){
-                produto = new Produto();
-                produto.setCod_produto(rs.getInt("COD_PRODUTO"));
-                produto.setNome_produto(rs.getString("NOME_PRODUTO"));
-                produto.setValor(rs.getDouble("VALOR"));
-                
-                lista.add(produto);
-            }
-        }catch(SQLException err){
-            err.printStackTrace();
-        }  
-        return lista;
+
+    @Override
+    public String toString() {
+        return "br.com.projeto.dao.ProdutoDAO[ id=" + id + " ]";
     }
+    
 }

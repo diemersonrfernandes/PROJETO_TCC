@@ -1,9 +1,9 @@
 package br.com.projeto.controle;
 
-import br.com.projeto.dao.ProdutoDAO;
+import br.com.projeto.dao.ItemPedidoDAO;
 import br.com.projeto.controle.util.JsfUtil;
 import br.com.projeto.controle.util.PaginationHelper;
-import br.com.projeto.facade.ProdutoDAOFacade;
+import br.com.projeto.facade.ItemPedidoDAOFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -19,29 +19,29 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-@Named("produtoDAOController")
+@Named("itemPedidoDAOController")
 @RequestScoped
-public class ProdutoBean implements Serializable {
+public class ItemPedidoBean implements Serializable {
 
-    private ProdutoDAO current;
+    private ItemPedidoDAO current;
     private DataModel items = null;
     @EJB
-    private br.com.projeto.facade.ProdutoDAOFacade ejbFacade;
+    private br.com.projeto.facade.ItemPedidoDAOFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public ProdutoBean() {
+    public ItemPedidoBean() {
     }
 
-    public ProdutoDAO getSelected() {
+    public ItemPedidoDAO getSelected() {
         if (current == null) {
-            current = new ProdutoDAO();
+            current = new ItemPedidoDAO();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private ProdutoDAOFacade getFacade() {
+    private ItemPedidoDAOFacade getFacade() {
         return ejbFacade;
     }
 
@@ -69,13 +69,13 @@ public class ProdutoBean implements Serializable {
     }
 
     public String prepareView() {
-        current = (ProdutoDAO) getItems().getRowData();
+        current = (ItemPedidoDAO) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new ProdutoDAO();
+        current = new ItemPedidoDAO();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -83,7 +83,7 @@ public class ProdutoBean implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ProdutoDAOCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ItemPedidoDAOCreated"));
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -92,7 +92,7 @@ public class ProdutoBean implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (ProdutoDAO) getItems().getRowData();
+        current = (ItemPedidoDAO) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -100,7 +100,7 @@ public class ProdutoBean implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ProdutoDAOUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ItemPedidoDAOUpdated"));
             return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -109,7 +109,7 @@ public class ProdutoBean implements Serializable {
     }
 
     public String destroy() {
-        current = (ProdutoDAO) getItems().getRowData();
+        current = (ItemPedidoDAO) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -133,7 +133,7 @@ public class ProdutoBean implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ProdutoDAODeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ItemPedidoDAODeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
@@ -189,21 +189,21 @@ public class ProdutoBean implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public ProdutoDAO getProdutoDAO(java.lang.Integer id) {
+    public ItemPedidoDAO getItemPedidoDAO(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = ProdutoDAO.class)
-    public static class ProdutoDAOControllerConverter implements Converter {
+    @FacesConverter(forClass = ItemPedidoDAO.class)
+    public static class ItemPedidoDAOControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            ProdutoBean controller = (ProdutoBean) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "produtoDAOController");
-            return controller.getProdutoDAO(getKey(value));
+            ItemPedidoBean controller = (ItemPedidoBean) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "itemPedidoDAOController");
+            return controller.getItemPedidoDAO(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -223,11 +223,11 @@ public class ProdutoBean implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof ProdutoDAO) {
-                ProdutoDAO o = (ProdutoDAO) object;
-                return getStringKey(o.getId());
+            if (object instanceof ItemPedidoDAO) {
+                ItemPedidoDAO o = (ItemPedidoDAO) object;
+                return getStringKey(o.getIditem());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + ProdutoDAO.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + ItemPedidoDAO.class.getName());
             }
         }
 

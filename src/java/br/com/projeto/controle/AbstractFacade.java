@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.projeto.facade;
+package br.com.projeto.controle;
 
 import java.util.List;
 import javax.persistence.EntityManager;
 
 /**
  *
- * @author Antonio Augusto
+ * @author prohgy
  */
 public abstract class AbstractFacade<T> {
 
@@ -37,7 +37,7 @@ public abstract class AbstractFacade<T> {
     public T find(Object id) {
         return getEntityManager().find(entityClass, id);
     }
-    
+
     public List<T> findAll() {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));

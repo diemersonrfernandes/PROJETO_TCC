@@ -17,7 +17,7 @@
         </f:metadata>
 
         <h:head>
-            <p:growl id="mensagens" autoUpdate="true"  sticky="true"/>
+            <p:growl id="mensagens" autoUpdate="true"  sticky="false" life="5000"/>
 
             <p:layout fullPage="true" resizeTitle="resize" style="background-color:#FFFFFF;">
               
@@ -35,15 +35,9 @@
                     <h:form >
                         <p:menu>
                             <p:submenu label="MENU DE ACESSO">
-                                <p:menuitem value="Início" url="tela.xhtml" rendered="#{usuario == null}"/>
-                                <p:menuitem value="Cardápio" url="cardapio.xhtml"/>
-                                <p:menuitem value="Acesse sua conta" url="login.xhtml"/>
-                                <p:menuitem value="Primeiro cadastro" url="manterCliente.xhtml"/>
-                                <p:menuitem value="Pedido Lista" url="pedido_Lista_sem_img.xhtml"/>
-                                <p:menuitem value="Cadastro Funcionário" url="cad_funcionario.xhtml" rendered="#{usuario.getIdperfil().getNmperfil() == 'Administrador'}"/>
-                                <p:menuitem value="Meus Dados" url="meus_dados.xhtml"/>
-                                <p:menuitem value="Pedido" url="pedido.xhtml" rendered="#{usuario.getIdperfil().getNmperfil() == 'Administrador'}"/>
-                                <p:menuitem value="Cadastro Produto" url="cad_produto.xhtml" rendered="#{usuario.getIdperfil().getNmperfil() == 'Administrador'}"/>
+                                <p:menuitem value="Meus dados" url="meus_dados"/>
+                                <p:menuitem value="Realizar pedidos" url="meus_dados"/>
+                                <p:menuitem value="Meus pedidos" url="meus_pedidos.xhtml"/>
                             </p:submenu>
                         </p:menu>
                     </h:form>
@@ -53,13 +47,12 @@
                     <ui:insert name="content" />
                 </p:layoutUnit>
                 
-                
                 <p:layoutUnit position="south" id="bottom">
                     <center>
                         <ui:insert name="bottom">© Delícias Burguer - 2017 - Cintya Rodrigues - Todos os direitos reservados.</ui:insert>
                     </center>
                 </p:layoutUnit>
-
+               
             </p:layout>
         </h:head>
     </f:view>

@@ -2,13 +2,14 @@ package br.com.projeto.controle;
 
 import br.com.projeto.dao.Acesso_loginDAO;
 import br.com.projeto.modelo.Acesso_login;
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name="acessoBean")
 @SessionScoped
 
-public class Acesso_loginBEAN {
+public class Acesso_loginBEAN implements Serializable{
     
     private Acesso_login acesso_login;
     private Acesso_loginDAO acesso_loginDAO;
