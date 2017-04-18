@@ -1,70 +1,70 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core"
-	template="tela.xhtml"
-	xmlns:pe="http://primefaces.org/ui/extensions">
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns="http://www.w3.org/1999/xhtml">
+    
+    <ui:composition template="tela.xhtml">
+        <ui:define name="metadata" />
+        <ui:define name="content">
 
-    <ui:define name="metadata" />
-    <ui:define name="content">
-        
-        <h:body style="font-size:small;padding:0px;">
-            <h:form id="formManter"  prependId="false" enctype="multipart/form-data">
-                <br />
-                
-                <p:fieldset id="fieldset_dados_gerais" toggleable="true" legend="Faça seu Cadastro">
-                    
-                    <div class="input-and-label"></div>
-                    <h:panelGrid id="formCad" columns="4">
+            <h:body style="font-size:small;padding:0px;">
+                <h:form id="formManter"  prependId="false" enctype="multipart/form-data">
+                    <br />
 
-                        <p:outputLabel value="Nome:" for="nome" />                
-                        <p:inputText id="nome" required="true" 
-                                     requiredMessage="Campo Nome é obrigatório" value="#{clienteBEAN.cliente.nome}"
-                                     size="60"/>
+                    <p:fieldset id="fieldset_dados_gerais" toggleable="true" legend="Faça seu Cadastro">
 
-                        <p:outputLabel value="CPF:" for="cpf" />
-                        <p:inputMask mask="999.999.999-99" id="cpf" required="true" 
-                                     requiredMessage="Campo CPF é obrigatório" value="#{clienteBEAN.cliente.cpf}"/>    
+                        <div class="input-and-label"></div>
+                        <h:panelGrid id="formCad" columns="4">
 
-                        <p:outputLabel value="Endereço:" for="endereco" /> 
-                        <p:inputText id="endereco" required="true" 
-                                     requiredMessage="Campo Endereço é obrigatório" value="#{clienteBEAN.cliente.endereco}"
-                                     size="60"/>
+                            <p:outputLabel value="Nome:" for="nome" />                
+                            <p:inputText id="nome" required="true" 
+                                         requiredMessage="Campo Nome é obrigatório" value="#{clienteDAOController.selected.nome}"
+                                         size="60"/>
 
-                        <p:outputLabel value="Telefone:" for="telefone"/>
-                        <p:inputMask mask="(99)9.9999-9999" id="telefone" required="true" 
-                                     requiredMessage="Campo Telefone é obrigatório" value="#{clienteBEAN.cliente.telefone}"/>
+                            <p:outputLabel value="CPF:" for="cpf" />
+                            <p:inputMask mask="999.999.999-99" id="cpf" required="true" 
+                                         requiredMessage="Campo CPF é obrigatório" value="#{clienteDAOController.selected.cpf}"/>    
 
-                        <p:outputLabel value="Email:" for="email"/>
-                        <p:inputText id="email" required="true" requiredMessage="Campo Email é obrigatório" 
-                                     value="#{clienteBEAN.cliente.email}" 
-                                     size="60"/>
-                        
-                    </h:panelGrid>
-                    
-                    <br/><br/>
-                    <p:fieldset id="fieldset_login" toggleable="false" legend="Login">
-                        <h:panelGrid id="formCadLogin" columns="4">
-                            <p:outputLabel value="Login:" for="login"/>
-                            <p:inputText id="login" required="true" 
-                                         requiredMessage="Campo Login é obrigatório" value="#{clienteBEAN.cliente.idusuario.nmusuario}"/>              
+                            <p:outputLabel value="Endereço:" for="endereco" /> 
+                            <p:inputText id="endereco" required="true" 
+                                         requiredMessage="Campo Endereço é obrigatório" value="#{clienteDAOController.selected.endereco}"
+                                         size="60"/>
 
-                            <p:outputLabel value="Senha:" for="senha" />
-                            <p:password id="senha" required="true" 
-                                        requiredMessage="Campo Senha é obrigatório" value="#{clienteBEAN.cliente.idusuario.deSenha}"/>   
-                        </h:panelGrid>                 
+                            <p:outputLabel value="Telefone:" for="telefone"/>
+                            <p:inputMask mask="(99)9.9999-9999" id="telefone" required="true" 
+                                         requiredMessage="Campo Telefone é obrigatório" value="#{clienteDAOController.selected.telefone}"/>
 
+                            <p:outputLabel value="Email:" for="email"/>
+                            <p:inputText id="email" required="true" requiredMessage="Campo Email é obrigatório" 
+                                         value="#{clienteDAOController.selected.email}" 
+                                         size="60"/>
+
+                        </h:panelGrid>
+
+                        <br/><br/>
+                        <p:fieldset id="fieldset_login" toggleable="false" legend="Login">
+                            <h:panelGrid id="formCadLogin" columns="4">
+                                <p:outputLabel value="Login:" for="login"/>
+                                <p:inputText id="login" required="true" 
+                                             requiredMessage="Campo Login é obrigatório" value="#{clienteDAOController.selectedUsuario.nmusuario}"/>              
+
+                                <p:outputLabel value="Senha:" for="senha" />
+                                <p:password id="senha" required="true" 
+                                            requiredMessage="Campo Senha é obrigatório" value="#{clienteDAOController.selectedUsuario.deSenha}"/>   
+                            </h:panelGrid>                 
+
+                        </p:fieldset>
+                        <br/><br/><br/>
+                        <div class="buttons">
+                            <p:commandButton id="btnCliente" value="Confirmar" actionListener="#{clienteDAOController.create(3)}" />
+                            <p:commandButton value="Limpar" type="reset" immediate="true" /> 
+                        </div>
                     </p:fieldset>
-                    <br/><br/><br/>
-                    <div class="buttons">
-                        <h:commandLink action="#{clienteBEAN.confirmar}" value="Confirmar"/>
-                
-
-                        <p:commandButton value="Limpar" type="reset" immediate="true" /> 
-                    </div>
-                </p:fieldset>
-            </h:form>
-        </h:body>
-    </ui:define>
-</ui:composition>
+                </h:form>
+            </h:body>
+        </ui:define>
+    </ui:composition>
+</html>

@@ -7,7 +7,7 @@ import br.com.projeto.dao.ClienteDAO;
 import br.com.projeto.dao.ItemPedidoDAO;
 import br.com.projeto.dao.ProdutoDAO;
 import br.com.projeto.dao.UsuarioDAO;
-import br.com.projeto.facade.ClienteFacade;
+import br.com.projeto.facade.ClienteDAOFacade;
 import br.com.projeto.facade.ItemPedidoFacade;
 import br.com.projeto.facade.PedidoFacade;
 import br.com.projeto.modelo.Carrinho;
@@ -248,7 +248,7 @@ public class PedidoBean implements Serializable {
         if (clienteDAO == null){
             ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
             UsuarioDAO usuariodao = (UsuarioDAO)attr.getRequest().getSession().getAttribute("usuario");
-            clienteDAO = new ClienteFacade().FindByUsuario(usuariodao);
+            clienteDAO = new ClienteDAOFacade().FindByUsuario(usuariodao);
         }
         
         return clienteDAO;

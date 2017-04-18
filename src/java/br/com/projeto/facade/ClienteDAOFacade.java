@@ -19,7 +19,7 @@ import javax.persistence.PersistenceContext;
  * @author Antonio Augusto
  */
 @Stateless
-public class ClienteFacade extends AbstractFacade<ClienteDAO> {
+public class ClienteDAOFacade extends AbstractFacade<ClienteDAO> {
 
     @PersistenceContext(unitName = "PROJETO_TCCPU")
     private EntityManager em;
@@ -33,18 +33,18 @@ public class ClienteFacade extends AbstractFacade<ClienteDAO> {
         return em;
     }
 
-    public ClienteFacade() {
+    public ClienteDAOFacade() {
         super(ClienteDAO.class);
     }
-    
-     public ClienteDAO FindByUsuario(UsuarioDAO usuarioDAO) throws NoResultException{
+
+    public ClienteDAO FindByUsuario(UsuarioDAO usuarioDAO) throws NoResultException {
         getEntityManager();
         ClienteDAO cliente;
         try {
-                cliente = (ClienteDAO) em.createNamedQuery("ClienteDAO.findByUsuario")
-                                .setParameter("idusuario", usuarioDAO.getIdusuario()).getSingleResult();
-        }catch (NoResultException e){
-                throw new NoResultException("Cliente não encontrado");  
+            cliente = (ClienteDAO) em.createNamedQuery("ClienteDAO.findByUsuario")
+                    .setParameter("idusuario", usuarioDAO.getIdusuario()).getSingleResult();
+        } catch (NoResultException e) {
+            throw new NoResultException("Cliente não encontrado");
         }
         return cliente;
     }
