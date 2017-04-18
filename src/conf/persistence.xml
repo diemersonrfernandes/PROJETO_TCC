@@ -9,9 +9,6 @@
     <class>br.com.projeto.dao.PerfilDAO</class>
     <class>br.com.projeto.dao.ProdutoDAO</class>
     <class>br.com.projeto.dao.UsuarioDAO</class>
-    <class>br.com.projeto.dao.ProdutoDAO</class>
-    <class>br.com.projeto.dao.PedidoDAO</class>
-    <class>br.com.projeto.dao.ItemPedidoDAO</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="eclipselink.logging.level" value="FINE"/>
