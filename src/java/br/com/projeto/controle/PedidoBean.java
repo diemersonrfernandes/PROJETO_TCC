@@ -7,20 +7,19 @@ import br.com.projeto.dao.ClienteDAO;
 import br.com.projeto.dao.ItemPedidoDAO;
 import br.com.projeto.dao.ProdutoDAO;
 import br.com.projeto.dao.UsuarioDAO;
-import br.com.projeto.facade.ClienteFacade;
-import br.com.projeto.facade.ItemPedidoDAOFacade;
-import br.com.projeto.facade.PedidoDAOFacade;
+import br.com.projeto.facade.ClienteDAOFacade;
+import br.com.projeto.facade.ItemPedidoFacade;
+import br.com.projeto.facade.PedidoFacade;
 import br.com.projeto.modelo.Carrinho;
-import br.com.projeto.modelo.Funcionario;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -32,18 +31,55 @@ import javax.faces.model.SelectItem;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+
 @Named("pedidoBean")
 @RequestScoped
 public class PedidoBean implements Serializable {
 
+    @EJB
+    private ItemPedidoFacade itemPedidoFacade;
+
     private PedidoDAO current;
     private DataModel items = null;
     @EJB
-    private br.com.projeto.facade.PedidoDAOFacade ejbFacade;
+    private br.com.projeto.facade.PedidoFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
+    private ClienteDAO clienteDAO;
+    private int quantidade;
+    //private ProdutoDAO produtoDAO;
+    List<Integer> quantidades;
+
+    public List<Integer> getQuantidades() {
+        quantidades = new ArrayList<Integer>();
+        for (int i = 1 ; i < 11 ;i++ ){
+            quantidades.add(i);
+        }
+        return quantidades;
+    }
+
+    public void setQuantidades(List<Integer> quantidades) {
+        this.quantidades = quantidades;
+    }
+
+//    public ProdutoDAO getProdutoDAO() {
+//        return produtoDAO;
+//    }
+//
+//    public void setProdutoDAO(ProdutoDAO produtoDAO) {
+//        this.produtoDAO = produtoDAO;
+//    }
+         
     public PedidoBean() {
+    }
+    
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 
     public PedidoDAO getSelected() {
@@ -54,7 +90,7 @@ public class PedidoBean implements Serializable {
         return current;
     }
 
-    private PedidoDAOFacade getFacade() {
+    private PedidoFacade getFacade() {
         return ejbFacade;
     }
 
@@ -69,19 +105,34 @@ public class PedidoBean implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+//                    DataModel dataModel = 
+//                            new ListDataModel(getFacade().
+//                                    findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    getCliente();
+                    DataModel dataModel = 
+                            new ListDataModel(getFacade().findAllByCliente(clienteDAO));
+                    return  dataModel;
                 }
             };
         }
         return pagination;
     }
 
-    public void adicionaCarrinho(ProdutoDAO produto, int quantidade) {
+    ////
+    
+    
+    public void adicionaCarrinho(ProdutoDAO produtoDAO, int qtde) {
 
+//        Object get = FacesContext.getCurrentInstance().getViewRoot().
+//                findComponent("formManter:qtde1");//.getAttributes().get("label");
+//        
+//        Object get2 = FacesContext.getCurrentInstance().getExternalContext().
+//                        getRequestParameterMap().get("formManter:qtde1");
+        
         Carrinho carrinho = new Carrinho();
-        carrinho.setProduto(produto);
-        carrinho.setQuantidade(quantidade);
-
+        carrinho.setProduto(produtoDAO);
+        carrinho.setQuantidade(qtde);
+    
         List<Carrinho> listaCarrinho = new ArrayList<Carrinho>();
 
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
@@ -157,17 +208,20 @@ public class PedidoBean implements Serializable {
                 soma += carrinho.getProduto().getValor().doubleValue();
             }
             
-            UsuarioDAO usuariodao = (UsuarioDAO)attr.getRequest().getSession().getAttribute("usuario");
-            ClienteDAO clienteDAO = new ClienteFacade().FindByUsuario(usuariodao);
+            getCliente();
+            
             
             //Salva o pedido
+            if (current == null) {
+                current = new PedidoDAO();
+            }
             current.setQuantidade(listaCarrinho.size());
             current.setValor(new BigDecimal(soma));
             current.setIdcliente(clienteDAO);
+            current.setDtpedido(new Date());
             getFacade().create(current);
             
-            ItemPedidoDAOFacade itemPedidoFacade = new  ItemPedidoDAOFacade();
-            // Salva os itens de pedido
+            
             for (Carrinho carrinho : listaCarrinho) {
                 ItemPedidoDAO itemPedidoDAO = new ItemPedidoDAO();
                 itemPedidoDAO.setIdpedido(current);
@@ -176,6 +230,8 @@ public class PedidoBean implements Serializable {
                            
                 itemPedidoFacade.create(itemPedidoDAO);
             }
+            
+            //itemPedidoFacade.flush();
             JsfUtil.addSuccessMessage("Pedido criado com sucesso");
             
             removeCarrinho();
@@ -187,7 +243,16 @@ public class PedidoBean implements Serializable {
             return null;
         }
     }
-
+    
+    private ClienteDAO getCliente(){
+        if (clienteDAO == null){
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+            UsuarioDAO usuariodao = (UsuarioDAO)attr.getRequest().getSession().getAttribute("usuario");
+            clienteDAO = new ClienteDAOFacade().FindByUsuario(usuariodao);
+        }
+        
+        return clienteDAO;
+    }
     public String prepareEdit() {
         current = (PedidoDAO) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
@@ -299,7 +364,7 @@ public class PedidoBean implements Serializable {
                 return null;
             }
             PedidoBean controller = (PedidoBean) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "pedidoDAOController");
+                    getValue(facesContext.getELContext(), null, "pedidoBean");
             return controller.getPedidoDAO(getKey(value));
         }
 

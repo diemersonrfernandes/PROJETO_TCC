@@ -7,10 +7,8 @@ package br.com.projeto.dao;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,13 +17,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -40,7 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "PedidoDAO.findByValor", query = "SELECT p FROM PedidoDAO p WHERE p.valor = :valor"),
     @NamedQuery(name = "PedidoDAO.findByQuantidade", query = "SELECT p FROM PedidoDAO p WHERE p.quantidade = :quantidade"),
     @NamedQuery(name = "PedidoDAO.findByDtpedido", query = "SELECT p FROM PedidoDAO p WHERE p.dtpedido = :dtpedido"),
-    @NamedQuery(name = "PedidoDAO.findByStatus", query = "SELECT p FROM PedidoDAO p WHERE p.status = :status")})
+    @NamedQuery(name = "PedidoDAO.findByStatus", query = "SELECT p FROM PedidoDAO p WHERE p.status = :status"),
+    @NamedQuery(name = "PedidoDAO.findByCliente", query = "SELECT p FROM PedidoDAO p WHERE p.idcliente = :cliente")})
 public class PedidoDAO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -60,8 +57,6 @@ public class PedidoDAO implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dtpedido;
     private Boolean status;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idpedido")
-    private Collection<ItemPedidoDAO> itemPedidoDAOCollection;
     @JoinColumn(name = "idcliente", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ClienteDAO idcliente;
@@ -118,15 +113,6 @@ public class PedidoDAO implements Serializable {
 
     public void setStatus(Boolean status) {
         this.status = status;
-    }
-
-    @XmlTransient
-    public Collection<ItemPedidoDAO> getItemPedidoDAOCollection() {
-        return itemPedidoDAOCollection;
-    }
-
-    public void setItemPedidoDAOCollection(Collection<ItemPedidoDAO> itemPedidoDAOCollection) {
-        this.itemPedidoDAOCollection = itemPedidoDAOCollection;
     }
 
     public ClienteDAO getIdcliente() {

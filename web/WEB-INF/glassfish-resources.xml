@@ -10,6 +10,9 @@
         <property name="URL" value="jdbc:mysql://localhost:3306/projeto_tcc?zeroDateTimeBehavior=convertToNull"/>
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
         <property name="show_sql" value="true"/>
+        <property name = "hibernate.show_sql" value = "true" />
+        <property name="eclipselink.logging.level" value="FINE"/>
+        <property name="openjpa.Log" value="DefaultLevel=WARN, Runtime=INFO, Tool=INFO, SQL=TRACE"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="java:app/projeto_tcc" object-type="user" pool-name="mysql_projeto_tcc_rootPool"/>
 </resources>

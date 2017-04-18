@@ -17,7 +17,7 @@
         </f:metadata>
 
         <h:head>
-            <p:growl id="mensagens" autoUpdate="true"  sticky="true"/>
+            <p:growl id="mensagens" autoUpdate="true"  sticky="false" life="5000"/>
 
             <p:layout fullPage="true" resizeTitle="resize" style="background-color:#FFFFFF;">
               
@@ -39,7 +39,7 @@
                                 <p:menuitem value="Cardápio" url="cardapio.xhtml"/>
                                 <p:menuitem value="Acesse sua conta" url="login.xhtml"/>
                                 <p:menuitem value="Primeiro cadastro" url="manterCliente.xhtml"/>
-                                <p:menuitem value="Pedido Lista" url="pedido_Lista_sem_img.xhtml"/>
+                                <p:menuitem value="Pedido Lista" url="pedido.xhtml"/>
                                 <p:menuitem value="Cadastro Funcionário" url="cad_funcionario.xhtml" rendered="#{usuario.getIdperfil().getNmperfil() == 'Administrador'}"/>
                                 <p:menuitem value="Meus Dados" url="meus_dados.xhtml"/>
                                 <p:menuitem value="Pedido" url="pedido.xhtml" rendered="#{usuario.getIdperfil().getNmperfil() == 'Administrador'}"/>

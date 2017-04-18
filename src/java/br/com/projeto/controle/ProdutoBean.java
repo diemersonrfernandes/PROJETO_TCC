@@ -3,7 +3,7 @@ package br.com.projeto.controle;
 import br.com.projeto.dao.ProdutoDAO;
 import br.com.projeto.controle.util.JsfUtil;
 import br.com.projeto.controle.util.PaginationHelper;
-import br.com.projeto.facade.ProdutoDAOFacade;
+import br.com.projeto.facade.ProdutoFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -26,7 +26,7 @@ public class ProdutoBean implements Serializable {
     private ProdutoDAO current;
     private DataModel items = null;
     @EJB
-    private br.com.projeto.facade.ProdutoDAOFacade ejbFacade;
+    private br.com.projeto.facade.ProdutoFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -41,7 +41,7 @@ public class ProdutoBean implements Serializable {
         return current;
     }
 
-    private ProdutoDAOFacade getFacade() {
+    private ProdutoFacade getFacade() {
         return ejbFacade;
     }
 
