@@ -34,7 +34,7 @@
                     <p:separator />
                     <span id="textosessaoexpira" style="font-weight: bold ; font-size:12px;">#{request.remoteUser == null ? '' : 'Sessão expira em: '} </span>
                     <span id="dialog-countdown" style="font-weight: bold ; font-size:12px;"></span>
-                    <p:separator />  
+                    <p:separator />
                     <p:commandButton type="button" 
                             value="#{request.remoteUser == null ? 'Login' : 'Sair'}" 
                             style="width: auto; height: 20px; font-size: 13px;" 
@@ -49,7 +49,7 @@
       		resizable="false"  
             widgetVar="idleDialog" 
             modal="true" 
-            width="400" 
+            width="401" 
             closable="false"
             draggable="false">  
 		    <h:outputText value="Você será redirecionada para página de login." />  
