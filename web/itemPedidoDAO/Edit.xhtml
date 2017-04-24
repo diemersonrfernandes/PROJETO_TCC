@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditItemPedidoDAOTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditItemPedidoDAOLabel_iditem}" for="iditem" />
+                    <h:inputText id="iditem" value="#{itemPedidoDAOController.selected.iditem}" title="#{bundle.EditItemPedidoDAOTitle_iditem}" required="true" requiredMessage="#{bundle.EditItemPedidoDAORequiredMessage_iditem}"/>
+                    <h:outputLabel value="#{bundle.EditItemPedidoDAOLabel_idproduto}" for="idproduto" />
+                    <h:selectOneMenu id="idproduto" value="#{itemPedidoDAOController.selected.idproduto}" title="#{bundle.EditItemPedidoDAOTitle_idproduto}" required="true" requiredMessage="#{bundle.EditItemPedidoDAORequiredMessage_idproduto}">
+                        <f:selectItems value="#{produtoDAOController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditItemPedidoDAOLabel_quantidade}" for="quantidade" />
+                    <h:inputText id="quantidade" value="#{itemPedidoDAOController.selected.quantidade}" title="#{bundle.EditItemPedidoDAOTitle_quantidade}" required="true" requiredMessage="#{bundle.EditItemPedidoDAORequiredMessage_quantidade}"/>
+                    <h:outputLabel value="#{bundle.EditItemPedidoDAOLabel_idpedido}" for="idpedido" />
+                    <h:selectOneMenu id="idpedido" value="#{itemPedidoDAOController.selected.idpedido}" title="#{bundle.EditItemPedidoDAOTitle_idpedido}" required="true" requiredMessage="#{bundle.EditItemPedidoDAORequiredMessage_idpedido}">
+                        <f:selectItems value="#{pedidoDAOController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{itemPedidoDAOController.update}" value="#{bundle.EditItemPedidoDAOSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditItemPedidoDAOViewLink}"/>
+                <br />
+                <h:commandLink action="#{itemPedidoDAOController.prepareList}" value="#{bundle.EditItemPedidoDAOShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditItemPedidoDAOIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
