@@ -17,6 +17,27 @@
         <param-name>primefaces.THEME</param-name>
         <param-value>blitzer</param-value>
     </context-param>
+    <!-- Tratamento de Erros -->
+    <error-page>
+            <error-code>401</error-code>
+            <location>/error/error_401.xhtml</location>
+    </error-page>
+    <error-page>
+            <error-code>403</error-code>
+            <location>/error/error_401.xhtml</location>
+    </error-page>
+    <error-page>
+            <error-code>404</error-code>
+            <location>/error/error.xhtml</location>
+    </error-page>
+    <error-page>
+            <error-code>500</error-code>
+            <location>/error/error.xhtml</location>
+    </error-page>
+    <error-page>
+            <exception-type>java.lang.Exception</exception-type>
+            <location>/error/error.xhtml</location>
+    </error-page>
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>

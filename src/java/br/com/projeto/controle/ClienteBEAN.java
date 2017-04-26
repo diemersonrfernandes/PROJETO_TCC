@@ -67,34 +67,51 @@ public class ClienteBEAN implements Serializable {
     }
 
     private ClienteDAOFacade getFacade() {
-        if (ejbFacade == null)
+        if (ejbFacade == null) {
             ejbFacade = new ClienteDAOFacade();
+        }
         return ejbFacade;
     }
 
     public String create(int idPerfil) throws IOException {
         try {
-            if (getSelected().getId() != null) {
-                getFacade().edit(current);
-            } else {
+            if (!usuarioExistente()) {
+                if (getSelected().getId() != null) {
+                    getFacade().edit(current);
+                } else {
 
-                PerfilDAO perfil = new PerfilDAO();
-                perfil.setIdperfil(idPerfil); // 3 = Cliente
-                currentUsuario.setIdperfil(perfil);
+                    PerfilDAO perfil = new PerfilDAO();
+                    perfil.setIdperfil(idPerfil); // 3 = Cliente
+                    currentUsuario.setIdperfil(perfil);
 
-                usuarioFacade.create(currentUsuario);
+                    usuarioFacade.create(currentUsuario);
 
-                current.setIdusuario(currentUsuario);
+                    current.setIdusuario(currentUsuario);
 
-                getFacade().create(current);
-            }
-            facesUtil.adiconarMsgInfo("Cadastro realizado com sucesso!");
+                    getFacade().create(current);
+                }
+                facesUtil.adiconarMsgInfo("Cadastro realizado com sucesso!");
 //            ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
 //            context.redirect(context.getRequestContextPath() + "pedido.xhtml?faces-redirect=true");
-            return "pedido.xhtml?faces-redirect=true";
+                return "pedido.xhtml?faces-redirect=true";
+            }else{
+                return null;
+            }
         } catch (Exception e) {
             facesUtil.adicionarMsgErro("Erro ao realizar cadastro!");
             return null;
+        }
+    }
+
+    public boolean usuarioExistente() {
+        try {
+            usuarioFacade.findUsuarioByName(currentUsuario.getNmusuario());
+            facesUtil.adicionarMsgErro("Usuário já cadastrado");
+            return true;
+        } catch (NoResultException e) {
+            return false;
+        } catch (Exception e) {
+            return false;
         }
     }
 
