@@ -27,7 +27,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * detalhes do usuario existente no banco de dados e se o usuario e senha não
  * são iguais. Entre outras coisas dispara uma, {@link BadCredentialsException}
  *
- * @author Antonio Augusto
  *
  */
 public class CustomAuthenticationManager implements AuthenticationManager {
