@@ -36,14 +36,12 @@
                         <p:menu>
                             <p:submenu label="MENU DE ACESSO">
                                 <p:menuitem value="Início" url="tela.xhtml" rendered="#{usuario == null}"/>
-                                <p:menuitem value="Cardápio" url="cardapio.xhtml"/>
-                                <p:menuitem value="Acesse sua conta" url="login.xhtml"/>
-                                <p:menuitem value="Primeiro cadastro" url="manterCliente.xhtml"/>
-                                <p:menuitem value="Pedido Lista" url="pedido.xhtml"/>
+                                <p:menuitem value="Cardápio" url="cardapio.xhtml" rendered="#{usuario == null}"/>
+                                <p:menuitem value="Primeiro cadastro" url="manterCliente.xhtml" rendered="#{usuario == null}"/>
+                                <p:menuitem value="Pedido" url="pedido.xhtml" rendered="#{usuario.getIdperfil().getNmperfil() == 'Cliente'}"/>
                                 <p:menuitem value="Cadastro Funcionário" url="cad_funcionario.xhtml" rendered="#{usuario.getIdperfil().getNmperfil() == 'Administrador'}"/>
-                                <p:menuitem value="Meus Dados" url="meus_dados.xhtml"/>
-                                <p:menuitem value="Pedido" url="pedido.xhtml" rendered="#{usuario.getIdperfil().getNmperfil() == 'Administrador'}"/>
-                                <p:menuitem value="Cadastro Produto" url="cad_produto.xhtml" rendered="#{usuario.getIdperfil().getNmperfil() == 'Administrador'}"/>
+                                <p:menuitem value="Meus Dados" url="meus_dados.xhtml" rendered="#{usuario.getIdperfil().getNmperfil() == 'Cliente'}"/>
+                                
                             </p:submenu>
                         </p:menu>
                     </h:form>

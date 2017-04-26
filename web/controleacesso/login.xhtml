@@ -11,7 +11,7 @@
     <h:body style="background-image:url('../resources/images/Tools-icon.png');background-position: 50% -60%;background-repeat: no-repeat">
 
         <p:dialog header="Login" visible="true" closable="false" draggable="true" resizable="false" width="420">
-
+            
             <center>
                 <h:outputText value="Usuário ou senha incorretos!" rendered="#{param.erro}" style="color: darkred"/>
             	<p:growl id="msg" showDetail="true" escape="false" /> 
@@ -26,6 +26,7 @@
                     <h:commandButton value="Login"/> 
                 </h:panelGrid>
             </form>
+            
         </p:dialog>
     </h:body>
 </html>

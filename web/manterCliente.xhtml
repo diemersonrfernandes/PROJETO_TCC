@@ -34,7 +34,7 @@
                                          size="60"/>
 
                             <p:outputLabel value="Telefone:" for="telefone"/>
-                            <p:inputMask mask="(99)9.9999-9999" id="telefone" required="true" 
+                            <p:inputMask mask="(99)99999-9999" id="telefone" required="true" 
                                          requiredMessage="Campo Telefone é obrigatório" value="#{clienteDAOController.selected.telefone}"/>
 
                             <p:outputLabel value="Email:" for="email"/>
@@ -54,12 +54,18 @@
                                 <p:outputLabel value="Senha:" for="senha" />
                                 <p:password id="senha" required="true" 
                                             requiredMessage="Campo Senha é obrigatório" value="#{clienteDAOController.selectedUsuario.deSenha}"/>   
+                           
+                                <p:outputLabel value="Confirmar Senha" for="confirmarSenha"/>
+                                <p:password id="confirmarSenha" required="true"
+                                            requiredMessage="Campo Confirmar senha é obrigatório"/>
+                            
                             </h:panelGrid>                 
 
                         </p:fieldset>
                         <br/><br/><br/>
                         <div class="buttons">
-                            <p:commandButton id="btnCliente" value="Confirmar" actionListener="#{clienteDAOController.create(3)}" />
+                            <p:commandButton id="btnCliente" value="Confirmar" actionListener="#{clienteDAOController.create(3)}" 
+                                             update=":formManter"/>
                             <p:commandButton value="Limpar" type="reset" immediate="true" /> 
                         </div>
                     </p:fieldset>
